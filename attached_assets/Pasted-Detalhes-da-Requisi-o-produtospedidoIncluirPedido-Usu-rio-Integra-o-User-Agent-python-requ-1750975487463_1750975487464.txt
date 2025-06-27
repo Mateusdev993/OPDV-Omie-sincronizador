@@ -1,0 +1,100 @@
+Detalhes da Requisição:
+produtospedidoIncluirPedido
+Usuário: 	Integração
+User-Agent: 	python-requests/2.32.4
+IP de Origem: 	34.82.112.208
+Requisição:
+{
+   cabecalho: {
+      codigo_pedido_integracao: "75172409",
+      codigo_cliente: 4328958895,
+      data_previsao: "26/06/2025",
+      etapa: "10",
+      codigo_parcela: "000",
+      quantidade_itens: 3
+   },
+   det: [
+      {
+         ide: {
+            codigo_item_integracao: "75172409_1"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_75172409_1",
+            descricao: "Coca Cola 2L [ITEM_1]",
+            quantidade: 1,
+            valor_unitario: 16.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Coca Cola 2L [ITEM_1] - Pedido: 75172409"
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "75172409_2"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_75172409_2",
+            descricao: "Fruki Guaraná 2L [ITEM_2]",
+            quantidade: 1,
+            valor_unitario: 13.49,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Fruki Guaraná 2L [ITEM_2] - Pedido: 75172409"
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "75172409_3"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_75172409_3",
+            descricao: "Água da Pedra sem gás 500ml [ITEM_3]",
+            quantidade: 3,
+            valor_unitario: 3.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Água da Pedra sem gás 500ml [ITEM_3] - Pedido: 75172409"
+         }
+      }
+   ],
+   informacoes_adicionais: {
+      codigo_categoria: "1.01.01",
+      codigo_conta_corrente: 4328958912,
+      consumidor_final: "S",
+      enviar_email: "N"
+   },
+   lista_parcelas: {
+      parcela: [
+         {
+            numero_parcela: 1,
+            valor: 16.99,
+            data_vencimento: "26/06/2025",
+            percentual: 100,
+            meio_pagamento: "18"
+         }
+      ]
+   },
+   observacoes: {
+      obs_venda: "Canal de Venda: N/A"
+   }
+}
+Resposta:
+{
+   codigo_pedido: 4328959132,
+   codigo_pedido_integracao: "75172409",
+   codigo_status: "0",
+   descricao_status: "Pedido cadastrado com sucesso!",
+   numero_pedido: "000000000000121"
+}

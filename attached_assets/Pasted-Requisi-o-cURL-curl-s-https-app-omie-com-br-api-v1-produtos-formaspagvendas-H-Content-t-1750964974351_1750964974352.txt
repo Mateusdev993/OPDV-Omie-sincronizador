@@ -1,0 +1,225 @@
+Requisição cURL:
+curl -s https://app.omie.com.br/api/v1/produtos/formaspagvendas/ \
+ -H 'Content-type: application/json' \
+ -d '{"call":"ListarFormasPagVendas","param":[{"pagina":1,"registros_por_pagina":50}],"app_key":"#APP_KEY#","app_secret":"#APP_SECRET#"}'
+Cabeçalho
+Content-Type: application/json; encoding=UTF-8
+Corpo
+{
+  "pagina": 1,
+  "total_de_paginas": 1,
+  "registros": 30,
+  "total_de_registros": 30,
+  "cadastros": [
+    {
+      "cCodigo": "000",
+      "cDescricao": "A Vista",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "001",
+      "cDescricao": "1 Parcela",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "002",
+      "cDescricao": "2 Parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 2
+    },
+    {
+      "cCodigo": "003",
+      "cDescricao": "3 Parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 3
+    },
+    {
+      "cCodigo": "004",
+      "cDescricao": "4 Parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 4
+    },
+    {
+      "cCodigo": "005",
+      "cDescricao": "5 Parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 5
+    },
+    {
+      "cCodigo": "006",
+      "cDescricao": "6 Parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 6
+    },
+    {
+      "cCodigo": "999",
+      "cDescricao": "Informar o número de parcelas",
+      "cListaParc": "",
+      "nDiasParc": 0,
+      "nQtdeParc": 999
+    },
+    {
+      "cCodigo": "A07",
+      "cDescricao": "Para 7 dias",
+      "cListaParc": "7",
+      "nDiasParc": 7,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A10",
+      "cDescricao": "Para 10 dias",
+      "cListaParc": "10",
+      "nDiasParc": 10,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A15",
+      "cDescricao": "Para 15 dias",
+      "cListaParc": "15",
+      "nDiasParc": 15,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A20",
+      "cDescricao": "Para 20 dias",
+      "cListaParc": "20",
+      "nDiasParc": 20,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A21",
+      "cDescricao": "Para 21 dias",
+      "cListaParc": "21",
+      "nDiasParc": 21,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A28",
+      "cDescricao": "Para 28 dias",
+      "cListaParc": "28",
+      "nDiasParc": 28,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A45",
+      "cDescricao": "Para 45 dias",
+      "cListaParc": "45",
+      "nDiasParc": 45,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A60",
+      "cDescricao": "Para 60 dias",
+      "cListaParc": "60",
+      "nDiasParc": 60,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "A90",
+      "cDescricao": "Para 90 dias",
+      "cListaParc": "90",
+      "nDiasParc": 90,
+      "nQtdeParc": 1
+    },
+    {
+      "cCodigo": "S01",
+      "cDescricao": "30/60",
+      "cListaParc": "30,60",
+      "nDiasParc": 0,
+      "nQtdeParc": 2
+    },
+    {
+      "cCodigo": "S10",
+      "cDescricao": "28/56",
+      "cListaParc": "28,56",
+      "nDiasParc": 0,
+      "nQtdeParc": 2
+    },
+    {
+      "cCodigo": "S18",
+      "cDescricao": "30/60/90",
+      "cListaParc": "30,60,90",
+      "nDiasParc": 0,
+      "nQtdeParc": 3
+    },
+    {
+      "cCodigo": "S25",
+      "cDescricao": "30/60/90/120",
+      "cListaParc": "30,60,90,120",
+      "nDiasParc": 0,
+      "nQtdeParc": 4
+    },
+    {
+      "cCodigo": "S28",
+      "cDescricao": "A Vista/30",
+      "cListaParc": "0,30",
+      "nDiasParc": 0,
+      "nQtdeParc": 2
+    },
+    {
+      "cCodigo": "S29",
+      "cDescricao": "A Vista/30/60",
+      "cListaParc": "0,30,60",
+      "nDiasParc": 0,
+      "nQtdeParc": 3
+    },
+    {
+      "cCodigo": "S30",
+      "cDescricao": "A Vista/30/60/90",
+      "cListaParc": "0,30,60,90",
+      "nDiasParc": 0,
+      "nQtdeParc": 4
+    },
+    {
+      "cCodigo": "S31",
+      "cDescricao": "A Vista/30/60/90/120/150",
+      "cListaParc": "0,30,60,90,120,150",
+      "nDiasParc": 0,
+      "nQtdeParc": 6
+    },
+    {
+      "cCodigo": "S46",
+      "cDescricao": "A Vista/30/60/90/120",
+      "cListaParc": "0,30,60,90,120",
+      "nDiasParc": 0,
+      "nQtdeParc": 5
+    },
+    {
+      "cCodigo": "S52",
+      "cDescricao": "28/56/84",
+      "cListaParc": "28,56,84",
+      "nDiasParc": 0,
+      "nQtdeParc": 3
+    },
+    {
+      "cCodigo": "T26",
+      "cDescricao": "30/60/90/120/150/180",
+      "cListaParc": "30,60,90,120,150,180",
+      "nDiasParc": 0,
+      "nQtdeParc": 6
+    },
+    {
+      "cCodigo": "T41",
+      "cDescricao": "30/60/90/120/150",
+      "cListaParc": "30,60,90,120,150",
+      "nDiasParc": 0,
+      "nQtdeParc": 5
+    },
+    {
+      "cCodigo": "T54",
+      "cDescricao": "Para 30 dias",
+      "cListaParc": "30",
+      "nDiasParc": 30,
+      "nQtdeParc": 1
+    }
+  ]
+}

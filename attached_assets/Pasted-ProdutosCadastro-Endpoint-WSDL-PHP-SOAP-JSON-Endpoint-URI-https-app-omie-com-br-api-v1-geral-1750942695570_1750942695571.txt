@@ -1,0 +1,469 @@
+ProdutosCadastro
+Endpoint
+WSDL
+PHP SOAP
+JSON
+Endpoint URI
+https://app.omie.com.br/api/v1/geral/produtos/
+Métodos
+Veja abaixo a documentação de cada método disponível para este serviço.
+
+AlterarProduto
+
+Parâmetros:
+ 	produto_servico_cadastro	produto_servico_cadastro	
+Cadastro completo de produtos
+Retorno produto_servico_status: Status de retorno do cadastro de produtos
+Exemplo:
+{
+  "codigo_produto_integracao": "1750941490",
+  "codigo": "teste0001",
+  "descricao": "Produto de teste",
+  "unidade": "UN"
+}
+AssociarCodIntProduto
+
+Parâmetros:
+ 	produto_servico_cadastro_chave	produto_servico_cadastro_chave	
+Pesquisa de produtos
+Retorno produto_servico_status: Status de retorno do cadastro de produtos
+Exemplo:
+{
+  "codigo_produto": 0,
+  "codigo_produto_integracao": ""
+}
+ConsultarProduto
+Consulta um produto.
+
+Parâmetros:
+ 	produto_servico_cadastro_chave	produto_servico_cadastro_chave	
+Pesquisa de produtos
+Retorno produto_servico_cadastro: Cadastro completo de produtos
+Exemplo:
+{
+  "codigo_produto": 0,
+  "codigo_produto_integracao": "",
+  "codigo": ""
+}
+ExcluirProduto
+Exclui um produto
+
+Parâmetros:
+ 	produto_servico_cadastro_chave	produto_servico_cadastro_chave	
+Pesquisa de produtos
+Retorno produto_servico_status: Status de retorno do cadastro de produtos
+Exemplo:
+{
+  "codigo_produto": 0,
+  "codigo_produto_integracao": "",
+  "codigo": ""
+}
+IncluirProduto
+Incluir um produto.
+
+Parâmetros:
+ 	produto_servico_cadastro	produto_servico_cadastro	
+Cadastro completo de produtos
+Retorno produto_servico_status: Status de retorno do cadastro de produtos
+Exemplo:
+{
+  "codigo_produto_integracao": "1750941490",
+  "codigo": "teste0001",
+  "descricao": "Produto de teste",
+  "unidade": "UN"
+}
+IncluirProdutosPorLote
+DEPRECATED
+
+Parâmetros:
+ 	produto_servico_lote_request	produto_servico_lote_request	
+Importação em Lote de produtos
+Retorno produto_servico_lote_response: Resposta do processamento do lote de produto importados.
+Exemplo:
+{
+  "lote": 123,
+  "produto_servico_cadastro": [
+    {
+      "codigo_produto_integracao": "1628097039",
+      "codigo": "teste1235",
+      "descricao": "Produto de teste",
+      "unidade": "UN",
+      "ncm": "9504.50.00"
+    },
+    {
+      "codigo_produto_integracao": "1628097040",
+      "codigo": "teste1234",
+      "descricao": "Produto de teste",
+      "unidade": "UN",
+      "ncm": "9504.50.00"
+    }
+  ]
+}
+ListarProdutos
+Lista completa do cadastro de produtos
+
+Parâmetros:
+ 	produto_servico_list_request	produto_servico_list_request	
+Lista os produtos cadastrados
+Retorno produto_servico_listfull_response: Lista completa de produtos encontrados no omie.
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 50,
+  "apenas_importado_api": "N",
+  "filtrar_apenas_omiepdv": "N"
+}
+ListarProdutosResumido
+Lista os produtos cadastrados
+
+Parâmetros:
+ 	produto_servico_list_request	produto_servico_list_request	
+Lista os produtos cadastrados
+Retorno produto_servico_list_response: Lista de produtos encontrados no omie.
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 50,
+  "apenas_importado_api": "N",
+  "filtrar_apenas_omiepdv": "N"
+}
+UpsertProduto
+
+Parâmetros:
+ 	produto_servico_cadastro	produto_servico_cadastro	
+Cadastro completo de produtos
+Retorno produto_servico_status: Status de retorno do cadastro de produtos
+Exemplo:
+{
+  "codigo_produto_integracao": "1750941490",
+  "codigo": "teste0001",
+  "descricao": "Produto de teste",
+  "unidade": "UN"
+}
+UpsertProdutosPorLote
+DEPRECATED
+
+Parâmetros:
+ 	produto_servico_lote_request	produto_servico_lote_request	
+Importação em Lote de produtos
+Retorno produto_servico_lote_response: Resposta do processamento do lote de produto importados.
+Exemplo:
+{
+  "lote": 123,
+  "produto_servico_cadastro": [
+    {
+      "codigo_produto_integracao": "1628097039",
+      "codigo": "teste1235",
+      "descricao": "Produto de teste 1235",
+      "unidade": "UN",
+      "ncm": "9504.50.00"
+    },
+    {
+      "codigo_produto_integracao": "1628097040",
+      "codigo": "teste1234",
+      "descricao": "Produto de teste 1234",
+      "unidade": "UN",
+      "ncm": "9504.50.00"
+    }
+  ]
+}
+Tipos Complexos
+armamento
+Detalhamento especifco para cadastro de armamentos.
+
+serie_cano	string15	Número de série do cano
+descr_arma	string256	Descrição completa da arma
+serie_arma	string15	Número de série da arma
+tipo_arma	string1	Indicador do tipo de arma de fogo
+caracteristicas
+lista de caracteristicas do produto.
+
+nCodCaract	integer	Código da característica de produto.+
+cCodIntCaract	string20	Código de integração da característica do produto.+
+cNomeCaract	string30	Nome da característica.
+cConteudo	string60	Conteúdo da característica.
+cExibirItemNF	string1	Exibir esta característica no item da NF-e emitida (S/N).
+cExibirItemPedido	string1	Exibir esta característica no item do Pedido, Remessa ou Devolução (S/N).
+cExibirOrdemProd	string1	Exibe esta característica na Ordem de Produção e Mapa de Custo (S/N).
+caracteristicasArray
+Este parâmetro é um array do tipo caracteristicas
+
+Lista de caracteristicas
+
+combustivel
+codigo_anp	string9	Código de Produto da ANP.
+descr_anp	string95	Descrição do Produto conforme ANP.
+percent_glp	decimal	Percentual de GLP Derivado do Petróleo.
+percent_gas_nac	decimal	Percentual de Gás Natural Nacional.
+percent_gas_imp	decimal	Percentual de Gás Natural Importado.
+valor_part	decimal	Valor de partida
+componentes_kit
+Componetes do KIT.
+
+codigo_componente	integer	Identificação do componente do KIT, deve ser utilizado para Alterar e Excluir o componente.+
+codigo_produto_componente	integer	Código do produto componente.+
+quantidade_componente	decimal	Quantidade do componente.
+valor_unitario_componente	decimal	Valor unitário do componente.
+local_estoque_componente	integer	Local estoque do componente.
+componentes_kitArray
+Este parâmetro é um array do tipo componentes_kit
+
+Lista de componentes_kit
+
+dadosIbpt
+Dados do IBPT.
+
+aliqFederal	decimal	Carga tributária federal para os produtos nacionais.+
+aliqEstadual	decimal	Carga tributária estadual.+
+aliqMunicipal	decimal	Carga tributária municipal.+
+fonte	string34	Fonte do IBPT.+
+chave	string6	Número da versão do arquivo do IBPT.+
+versao	string6	Versão da Tabela IBPT.+
+valido_de	string10	Tabela do IBPT válilda a partir da data.+
+valido_ate	string10	Tabela do IBPT valida até a data.+
+imagens
+Lista de imagens do produto.
+
+url_imagem	text	URL da Imagem do produto.
+imagensArray
+Este parâmetro é um array do tipo imagens
+
+Lista de imagens
+
+info
+dInc	string10	Data da Inclusão.+
+hInc	string8	Hora da Inclusão.+
+uInc	string10	Usuário da Inclusão.+
+dAlt	string10	Data da Alteração.+
+hAlt	string8	Hora da Alteração.+
+uAlt	string10	Usuário da Alteração.+
+cImpAPI	string1	Importado pela API (S/N).+
+medicamento
+cod_anvisa	string13	Código de produto Anvisa
+preco_max_cons	decimal	Preço máximo consumidor
+omie_fail
+code	integer	Codigo do erro
+description	text	Descricao do erro
+referer	text	Origem do erro
+fatal	boolean	Indica se eh um erro fatal
+produto_servico_cadastro
+Cadastro completo de produtos
+
+id_class	integer	ID da Classe do produto.
+kit_upreco	string1	KIT - Atualizar o valor quando atualizar o componente.
+comb_pbio	decimal	Combustíveis - Percentual Bio Combustivel
+med_anvmis	string10	Medicamentos - Motivo de isenção da Anvisa
+unid_trib	string6	Unidade Tributável
+fat_trib	decimal	Fator de Conversão da Unidade Tributável.
+vei_usado	string1	Veículos - Usado
+vei_vplaca	string7	Veículos - Placa do Veículo Usado
+dias_vallt	integer	Dias de Validade do Lote
+codigo_produto	integer	Código do produto.+
+codigo_produto_integracao	string60	Código de integração do produto.+
+codigo	string60	Código do Produto.+
+descricao	string120	Descrição do produto.+
+unidade	string6	Código da Unidade.+
+ncm	string13	Código da Nomenclatura Comum do Mercosul (NCM).+
+ean	string14	Código EAN (GTIN - Global Trade Item Number).+
+valor_unitario	decimal	Preço Unitário de Venda.+
+codigo_familia	integer	Código da Familia do Produto.+
+tipoItem	string2	Código do Tipo do Item para o SPED.+
+produto_variacao	string1	Indica se o Produto Possui Variações.+
+produto_lote	string1	Indica se o produto possui lote.+
+recomendacoes_fiscais	recomendacoes_fiscais	Recomendações Fiscais.
+peso_liq	decimal	Peso Líquido (Kg).+
+peso_bruto	decimal	Peso Bruto (Kg).+
+altura	decimal	Altura (centimentos).+
+largura	decimal	Largura (centimetros)+
+profundidade	decimal	Profundidade (centimetros).+
+marca	string60	Marca.+
+modelo	string60	Modelo.+
+dias_garantia	integer	Dias de Garantia.+
+dias_crossdocking	integer	Dias de Crossdocking.+
+descr_detalhada	text	Descrição Detalhada para o Produto.+
+obs_internas	text	Observações Internas.+
+imagens	imagensArray	Lista de imagens do produto.
+videos	videosArray	Lista de videos do produto.
+caracteristicas	caracteristicasArray	lista de caracteristicas do produto.
+tabelas_preco	tabelas_precoArray	Lista de tabelas de preço.
+info	info	Informações complemetares do cadastro do produto.
+exibir_descricao_nfe	string1	Indica se a Descrição Detalhada deve ser exibida nas Informações Adicionais do Item da NF-e (S/N).
+exibir_descricao_pedido	string1	Indica se a Descrição Detalhada deve ser exibida na impressão do Pedido (S/N).
+medicamento	medicamento	Detalhamento específico para cadastro de medicamentos+
+combustivel	combustivel	Detalhamento específico para cadastro de combustíveis.+
+veiculo	veiculo	Detalhamento específico para cadastro de veículos+
+armamento	armamento	Detalhamento especifco para cadastro de armamentos.+
+cst_icms	string2	Código da Situação Tributária do ICMS.+
+modalidade_icms	string1	Modalidade da Base de Cálculo do ICMS.+
+csosn_icms	string3	Código da Situação Tributária para Simples Nacional.+
+aliquota_icms	decimal	Alíquota de ICMS.+
+red_base_icms	decimal	Percentual de redução de base do ICMS.+
+motivo_deson_icms	string2	Motivo da desoneração do ICMS.+
+per_icms_fcp	decimal	Percentual do Fundo de Combate a Pobreza do ICMS.+
+codigo_beneficio	string20	Código de integração da característica do produto.+
+cst_pis	string2	Código da Situação Tributária do PIS.+
+aliquota_pis	decimal	Alíquota do PIS.+
+red_base_pis	decimal	Percentual de redução de base do PIS.+
+cst_cofins	string2	Código da Situação Tributária do COFINS.+
+aliquota_cofins	decimal	Alíquota do COFINS.+
+red_base_cofins	decimal	Percentual de redução de base do COFINS.+
+cfop	string10	CFOP do Produto.+
+dadosIbpt	dadosIbpt	Dados do IBPT.+
+codInt_familia	string20	Código de Integração da Familia do Produto.+
+descricao_familia	string50	Descrição da Familia do Produto.+
+bloqueado	string1	Indica se o registro está bloqueado (S/N).+
+bloquear_exclusao	string1	Indica se a exclusão do registro está bloqueada (S/N).+
+importado_api	string1	Indica se o registro foi incluído via API (S/N).+
+inativo	string1	Indica se o cadastro do produto está inativo (S/N).+
+componentes_kit	componentes_kitArray	Componetes do KIT.
+lead_time	integer	Lead Time médio de ressuprimento em dias.
+aliquota_ibpt	decimal	DEPRECATED.
+cest	string9	DEPRECATED.
+quantidade_estoque	decimal	DEPRECATED.
+estoque_minimo	decimal	DEPRECATED.
+origem_imposto	string10	Origem do Imposto+
+produto_servico_cadastroArray
+Este parâmetro é um array do tipo produto_servico_cadastro
+
+Lista de produto_servico_cadastro
+
+produto_servico_cadastro_chave
+Pesquisa de produtos
+
+codigo_produto	integer	Código do produto.+
+codigo_produto_integracao	string60	Código de integração do produto.+
+codigo	string60	Código do Produto.+
+produto_servico_list_request
+Lista os produtos cadastrados
+
+pagina	integer	Número da página retornada
+registros_por_pagina	integer	Número de registros retornados na página.
+apenas_importado_api	string1	Exibir apenas os registros gerados pela API.+
+ordenar_por	string100	Ordem de exibição dos dados. Padrão: Código.
+ordem_decrescente	string1	Se a lista será apresentada em ordem decrescente (S/N).+
+filtrar_por_data_de	string10	Filtrar os registros a partir de uma data.+
+filtrar_por_hora_de	string8	Filtrar a partir da hora.+
+filtrar_por_data_ate	string10	Filtrar os registros até uma data.+
+filtrar_por_hora_ate	string8	Filtrar até a hora.+
+filtrar_apenas_inclusao	string1	Filtrar apenas os registros incluídos (S/N).+
+filtrar_apenas_alteracao	string1	Filtrar apenas os registros alterados (S/N).+
+filtrar_apenas_omiepdv	string1	Filtrar apenas produtos marcados para venda via PDV.+
+filtrar_apenas_familia	string50	Filtrar por ID da Familia de Produto.+
+filtrar_apenas_tipo	string2	Código do Tipo do Item para o SPED.+
+filtrar_apenas_descricao	string200	Filtro pela descrição do produto.+
+filtrar_apenas_marketplace	string1	Filtrar apenas produtos marcados para venda via Market Place ou e-Commerce.+
+filtrar_apenas_pdv	string1	Filtrar apenas produtos marcados para venda via Ponto de Venda (PDV).+
+exibir_caracteristicas	string1	Exibir as características do produto (S/N).+
+exibir_tabelas_preco	string1	Exibir as tabelas de preço do produto (S/N).+
+caracteristicas	caracteristicasArray	lista de caracteristicas do produto.
+produtosPorCodigo	produtosPorCodigoArray	Filtro por código do produto.+
+inativo	string1	Indica se o cadastro do produto está inativo (S/N).+
+ncm	string13	Código da Nomenclatura Comum do Mercosul (NCM).+
+ean	string14	Código EAN (GTIN - Global Trade Item Number).+
+ordem_descrescente	string1	DEPRECATED.
+exibir_obs	string1	Exibir as observações do produto (S/N).+
+exibir_kit	string1	Exibir os componentes do KIT (S/N).+
+produto_servico_list_response
+Lista de produtos encontrados no omie.
+
+pagina	integer	Número da página retornada
+total_de_paginas	integer	Número total de páginas
+registros	integer	Número de registros retornados na página.
+total_de_registros	integer	total de registros encontrados
+produto_servico_resumido	produto_servico_resumidoArray	Cadastro reduzido de produtos
+produto_servico_listfull_response
+Lista completa de produtos encontrados no omie.
+
+pagina	integer	Número da página retornada
+total_de_paginas	integer	Número total de páginas
+registros	integer	Número de registros retornados na página.
+total_de_registros	integer	total de registros encontrados
+produto_servico_cadastro	produto_servico_cadastroArray	Cadastro completo de produtos
+produto_servico_lote_request
+lote	integer	Número do lote
+produto_servico_cadastro	produto_servico_cadastroArray	Cadastro completo de produtos
+produto_servico_lote_response
+Resposta do processamento do lote de produto importados.
+
+lote	integer	Número do lote
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+produto_servico_resumido
+Cadastro reduzido de produtos
+
+codigo_produto	integer	Código do produto.+
+codigo_produto_integracao	string60	Código de integração do produto.+
+codigo	string60	Código do Produto.+
+descricao	string120	Descrição do produto.+
+valor_unitario	decimal	Preço Unitário de Venda.+
+produto_servico_resumidoArray
+Este parâmetro é um array do tipo produto_servico_resumido
+
+Lista de produto_servico_resumido
+
+produto_servico_status
+Status de retorno do cadastro de produtos
+
+codigo_produto	integer	Código do produto.+
+codigo_produto_integracao	string60	Código de integração do produto.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+produtosPorCodigo
+codigo_produto	integer	Código do produto.+
+codigo_produto_integracao	string60	Código de integração do produto.+
+codigo	string60	Código do Produto.+
+produtosPorCodigoArray
+Este parâmetro é um array do tipo produtosPorCodigo
+
+Lista de produtosPorCodigo
+
+recomendacoes_fiscais
+origem_mercadoria	string1	Origem da Mercadoria.+
+id_preco_tabelado	integer	ID do Preço tabelado (Pauta).+
+id_cest	string9	Código do CEST.+
+cupom_fiscal	string1	Indica se o produto é comercializado via PDV.+
+market_place	string1	Indica se o produto será comercializado via Market Place ou e-commerce (S/N)+
+indicador_escala	string1	Indicador de Produção em Escala Relevante.+
+cnpj_fabricante	string20	CNPJ do Fabricante da Mercadoria.+
+tabelas_preco
+nCodTabPreco	integer	Id da tabela de preço.
+cNomeTabPreco	string50	Nome da tabela de preço.
+nValorTabPreco	decimal	Valor do produto na tabela de preço.
+tabelas_precoArray
+Este parâmetro é um array do tipo tabelas_preco
+
+Lista de tabelas_preco
+
+veiculo
+ano_fabr	string4	Veículos - Ano de Fabricação
+ano_modelo	string4	Ano modelo de fabricação
+chassi	string17	Chassi do veículo
+cilin	string4	Cilindradas
+cmt	string9	Capacidade máxima de tração
+cond_veic	string1	Condição do veículo
+cod_cor_veic	string4	Código da cor do veículo
+cod_cor_den	string2	Código da cor DENATRAN
+descr_cor	string40	Descrição da cor
+dist_eixo	string4	Distância entre eixos
+especie_veic	string1	Espécie do veículo
+lota_max	string3	Capacidade máxima de lotação
+cod_modelo	string6	Código marca modelo
+motor	string21	Número do motor
+peso_bruto_veic	string9	Peso bruto
+peso_liquido_veic	string9	Peso líquido
+potencia	string4	Potência motor
+serie_veic	string9	Série do veículo
+tipo_comb	string2	Tipo de combustível
+tipo_oper	string1	Tipo da operação
+tipo_pintura	string1	Tipo de pintura
+tipo_restricao	string1	Restrição
+tipo_veic	string2	Tipo de veículo de acordo com a tabela RENAVAM
+cond_vin	string1	Condição do VIN
+videos
+Lista de videos do produto.
+
+url_video	text	URL do Video do produto.
+videosArray
+Este parâmetro é um array do tipo videos
+
+Lista de videos

@@ -1,0 +1,38 @@
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): app.omie.com.br:443
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 200 124
+INFO:services.omie_service:Customer created in Omie: {'codigo_cliente_omie': 4327602461, 'codigo_cliente_integracao': '7055158', 'codigo_status': '0', 'descricao_status': 'Cliente cadastrado com sucesso!'}
+INFO:services.sync_service:Customer 'Emmanuel Umpierre Menezes' mapped: OPDV 7055158 -> Omie 4327602461
+INFO:services.sync_service:Starting order synchronization: 10 orders
+WARNING:services.sync_service:Pedido '9226' pulado: cliente 28131315 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '9588' pulado: cliente 4467503 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '3898' pulado: cliente 4554178 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '4199' pulado: cliente 682425 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido 'None' pulado: cliente 807486 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '22973' pulado: cliente 824987 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '7051' pulado: cliente 5423353 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido 'None' pulado: cliente 7055158 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '9499' pulado: cliente 947487 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '8648' pulado: cliente 121846 sem CPF/CNPJ
+DEBUG:urllib3.connectionpool:https://api.opdv.com.br:443 "GET /stores HTTP/1.1" 200 259
+DEBUG:services.opdv_service:OPDV test response status: 200
+DEBUG:services.opdv_service:OPDV test response content: {"stores":[{"id":362,"name":"Tele Trago POA","corporateName":"TELE TRAGO EIRELI","cnpj":"11285990000178","state":"RS","city":"Porto Alegre","street":"Rua Miguel Tostes","neighborhood":"Rio Branco","po
+[2025-06-24 19:06:52 +0000] [14377] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/gunicorn/workers/base.py", line 143, in init_process
+    self.run()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 125, in run
+    self.run_for_one(timeout)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 84, in run_for_one
+    self.wait(timeout)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 36, in wait
+    ret = select.select(self.wait_fds, [], [], timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 238, in timeout_handler
+    raise RequestTimeout("Sync operation timed out")
+werkzeug.exceptions.RequestTimeout: 408 Request Timeout: Sync operation timed out
+[2025-06-24 19:06:52 +0000] [14377] [INFO] Worker exiting (pid: 14377)
+[2025-06-24 19:06:52 +0000] [14366] [ERROR] Worker (pid:14377) exited with code 255
+[2025-06-24 19:06:52 +0000] [14366] [ERROR] Worker (pid:14377) exited with code 255.
+[2025-06-24 19:06:52 +0000] [14604] [INFO] Booting worker with pid: 14604

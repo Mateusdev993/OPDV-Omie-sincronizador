@@ -1,0 +1,100 @@
+Omie Developer - Teste de APIs
+Parâmetros
+
+Endpoint
+https://app.omie.com.br/api/v1/geral/meiospagamento/
+Selecione o aplicativo (ou digite as chaves abaixo)
+
+TELE TRAGO LTDA
+Nome
+Valor
+OMIE_CALL
+ListarMeiosPagamento
+
+Conteúdo
+{
+  "codigo": ""
+}
+
+Compartilhar este exemplo
+Executar
+Requisição cURL:
+curl -s https://app.omie.com.br/api/v1/geral/meiospagamento/ \
+ -H 'Content-type: application/json' \
+ -d '{"call":"ListarMeiosPagamento","param":[{"codigo":""}],"app_key":"#APP_KEY#","app_secret":"#APP_SECRET#"}'
+Cabeçalho
+Content-Type: application/json; encoding=UTF-8
+Corpo
+{
+  "MeiosPagamentoLista": null,
+  "tipo_documento_cadastro": [
+    {
+      "codigo": "01",
+      "descricao": "Dinheiro"
+    },
+    {
+      "codigo": "02",
+      "descricao": "Cheque"
+    },
+    {
+      "codigo": "03",
+      "descricao": "Cartão de Crédito"
+    },
+    {
+      "codigo": "04",
+      "descricao": "Cartão de Débito"
+    },
+    {
+      "codigo": "05",
+      "descricao": "Crédito Loja"
+    },
+    {
+      "codigo": "10",
+      "descricao": "Vale Alimentação"
+    },
+    {
+      "codigo": "11",
+      "descricao": "Vale Refeição"
+    },
+    {
+      "codigo": "12",
+      "descricao": "Vale Presente"
+    },
+    {
+      "codigo": "13",
+      "descricao": "Vale Combustível"
+    },
+    {
+      "codigo": "14",
+      "descricao": "Duplicata Mercantil"
+    },
+    {
+      "codigo": "15",
+      "descricao": "Boleto Bancário"
+    },
+    {
+      "codigo": "16",
+      "descricao": "Depósito Bancário"
+    },
+    {
+      "codigo": "17",
+      "descricao": "Pagamento Instantâneo (PIX)"
+    },
+    {
+      "codigo": "18",
+      "descricao": "Transferência bancária, Carteira Digital"
+    },
+    {
+      "codigo": "19",
+      "descricao": "Programa de fidelidade, Cashback, Crédito Virtual."
+    },
+    {
+      "codigo": "90",
+      "descricao": "Sem Pagamento"
+    },
+    {
+      "codigo": "99",
+      "descricao": "Outros"
+    }
+  ]
+}

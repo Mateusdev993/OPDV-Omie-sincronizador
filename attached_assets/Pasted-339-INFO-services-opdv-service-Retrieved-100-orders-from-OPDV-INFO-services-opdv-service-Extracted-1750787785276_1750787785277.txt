@@ -1,0 +1,33 @@
+339
+INFO:services.opdv_service:Retrieved 100 orders from OPDV
+INFO:services.opdv_service:Extracted 84 unique customers from orders
+INFO:root:Extracted 84 customers
+INFO:services.sync_service:Processing 5 valid customers (skipped 5 without CPF/CNPJ)
+WARNING:services.sync_service:Skipping 5 customers without CPF/CNPJ
+INFO:services.sync_service:Starting customer synchronization: 5 valid customers
+DEBUG:services.sync_service:Syncing customer 1/5: Frantiesco Nitschke Bozzetto (ID: 734874) CPF/CNPJ: 02233302052
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 425 126
+WARNING:services.omie_service:Omie API rate limit (425) - customer structure is valid, API temporarily rate limited
+INFO:services.sync_service:Customer 'Frantiesco Nitschke Bozzetto' mapped: OPDV 734874 -> Omie 734874
+DEBUG:services.sync_service:Syncing customer 2/5: Gui Martins (ID: 28127303) CPF/CNPJ: 03115236093
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 425 126
+WARNING:services.omie_service:Omie API rate limit (425) - customer structure is valid, API temporarily rate limited
+INFO:services.sync_service:Customer 'Gui Martins' mapped: OPDV 28127303 -> Omie 28127303
+DEBUG:services.sync_service:Syncing customer 3/5: Edilson Cardoso (ID: 655795) CPF/CNPJ: 00294793046
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 425 126
+WARNING:services.omie_service:Omie API rate limit (425) - customer structure is valid, API temporarily rate limited
+INFO:services.sync_service:Customer 'Edilson Cardoso' mapped: OPDV 655795 -> Omie 655795
+DEBUG:services.sync_service:Syncing customer 4/5: BRUNA (ID: 121324) CPF/CNPJ: 83455205020
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 425 126
+WARNING:services.omie_service:Omie API rate limit (425) - customer structure is valid, API temporarily rate limited
+INFO:services.sync_service:Customer 'BRUNA' mapped: OPDV 121324 -> Omie 121324
+DEBUG:services.sync_service:Syncing customer 5/5: Bruno Vairo (ID: 28128842) CPF/CNPJ: 07794122732
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/clientes/ HTTP/1.1" 425 126
+WARNING:services.omie_service:Omie API rate limit (425) - customer structure is valid, API temporarily rate limited
+INFO:services.sync_service:Customer 'Bruno Vairo' mapped: OPDV 28128842 -> Omie 28128842
+INFO:services.sync_service:Starting order synchronization: 1 orders
+WARNING:services.sync_service:Pedido '5552' pulado: cliente 694921 sem CPF/CNPJ
+DEBUG:urllib3.connectionpool:https://api.opdv.com.br:443 "GET /stores HTTP/1.1" 200 259
+DEBUG:services.opdv_service:OPDV test response status: 200
+DEBUG:services.opdv_service:OPDV test response content: {"stores":[{"id":362,"name":"Tele Trago POA","corporateName":"TELE TRAGO EIRELI","cnpj":"11285990000178","state":"RS","city":"Porto Alegre","street":"Rua Miguel Tostes","neighborhood":"Rio Branco","po
+DEBUG:urllib3.connectionpool:https://app.omie.com.br:443 "POST /api/v1/geral/cenarios/ HTTP/1.1" 500 121

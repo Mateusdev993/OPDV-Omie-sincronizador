@@ -1,0 +1,172 @@
+CorrenteCadastro-Endpoint-WSDL-PHP-SOAP-JSON-Endpoint-URI-https-app-omie-com-br-api-v1--1750941234832_1750941234832.txt
+ContaCorrenteCadastro
+Endpoint
+WSDL
+PHP SOAP
+JSON
+Endpoint URI
+https://app.omie.com.br/api/v1/geral/contacorrente/
+Métodos
+Veja abaixo a documentação de cada método disponível para este serviço.
+
+AlterarContaCorrente
+Altera a Conta Corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+ConsultarContaCorrente
+Realiza a consulta de uma conta corrente
+
+Parâmetros:
+ 	fin_conta_corrente_chave	fin_conta_corrente_chave	
+Chave de pesquisa da Conta Corrente
+Retorno ListarContasCorrentes: Lista de contas correntes.
+Exemplo:
+{
+  "nCodCC": 0,
+  "cCodCCInt": ""
+}
+ExcluirContaCorrente
+Excluir a Conta Corrente
+
+Parâmetros:
+ 	fin_conta_corrente_chave	fin_conta_corrente_chave	
+Chave de pesquisa da Conta Corrente
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "nCodCC": 0,
+  "cCodCCInt": ""
+}
+IncluirContaCorrente
+Inclui uma conta corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+ListarContasCorrentes
+Listar Contas Correntes
+
+Parâmetros:
+ 	fin_conta_corrente_listar_request	fin_conta_corrente_listar_request	
+Retorno da solicitação da listagem de contas correntes cadastradas no Omie.
+Retorno fin_conta_corrente_listar_response:
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+ListarResumoContasCorrentes
+Listar resumida de Contas correntes.
+
+Parâmetros:
+ 	fin_conta_corrente_resumo_request	fin_conta_corrente_resumo_request	
+Solicitação da listagem resumida de contas correntes.
+Retorno fin_conta_corrente_resumo_response:
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+PesquisarContaCorrente
+DEPRECATED
+
+Parâmetros:
+ 	fin_conta_corrente_pesquisar	fin_conta_corrente_pesquisar	
+DEPRECATED
+Retorno fin_conta_corrente_pesquisar_resposta: DEPRECATED
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+UpsertContaCorrente
+Upsert da Conta Corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+UpsertContaCorrentePorLote
+Upsert por lote de Conta Corrente
+
+Parâmetros:
+ 	fin_conta_corrente_lote_request	fin_conta_corrente_lote_request	
+Request do Lote da Conta Corrente
+Retorno fin_conta_corrente_lote_response: Response do conta corrente
+Exemplo:
+{
+  "lote": 1,
+  "fin_conta_corrente_cadastro": [
+    {
+      "cCodCCInt": "MyCC0001",
+      "tipo_conta_corrente": "CX",
+      "codigo_banco": "999",
+      "descricao": "Caixinha",
+      "saldo_inicial": 0
+    }
+  ]
+}
+Tipos Complexos
+ListarContasCorrentes
+Lista de contas correntes.
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+tipo_conta_corrente	string2	Tipo da Conta Corrente.+
+codigo_banco	string3	Código do banco.+
+descricao	string40	Descrição da conta corrente.
+codigo_agencia	string10	Código da Agência
+numero_conta_corrente	string25	Número da conta corrente.
+saldo_inicial	decimal	Saldo Inicial da Conta Corrente
+saldo_data	string10	Data do Saldo Inicial da Conta Corrente
+valor_limite	decimal	Valor do Limite do Crédito
+nao_fluxo	string1	Não exibir no Fluxo de Caixa
+nao_resumo	string1	Não exibir no Resumo de Finanças
+observacao	text	Observação
+cobr_sn	string1	Indica se realiza Cobrança Bancária para a conta corrente [S/N]
+per_juros	decimal	Percentual de Juros ao Mês
+per_multa	decimal	Percentual de Multa
+bol_instr1	string80	Mensagem de Instrução do Boleto - Linha 1
+bol_instr2	string80	Mensagem de Instrução do Boleto - Linha 2
+bol_instr3	string80	Mensagem de Instrução do Boleto - Linha 3
+bol_instr4	string80	Mensagem de Instrução do Boleto - Linha 4
+bol_sn	string1	Indica se emite Boletos de Cobrança [S/N]
+pix_sn	string1	Indica se emite PIX [S/N]
+cnab_esp	string2	Espécie padrão para a Remessa de Cobrança
+cobr_esp	string3	Espécie padrão para o Boleto de Cobrança
+dias_rcomp	integer	Dias para Compensação dos Recebimentos
+modalidade	string3	Modalidade da Cobrança
+cancinstr	string3	Código de Instrução de Cancelamento, Baixa ou Devolução
+pdv_enviar	string1	Utiliza a Conta Corrente no OmiePDV
+pdv_sincr_analitica	string1	Sincr...

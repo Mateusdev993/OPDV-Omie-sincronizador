@@ -1,0 +1,395 @@
+ContaCorrenteCadastro
+Endpoint
+WSDL
+PHP SOAP
+JSON
+Endpoint URI
+https://app.omie.com.br/api/v1/geral/contacorrente/
+Métodos
+Veja abaixo a documentação de cada método disponível para este serviço.
+
+AlterarContaCorrente
+Altera a Conta Corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+ConsultarContaCorrente
+Realiza a consulta de uma conta corrente
+
+Parâmetros:
+ 	fin_conta_corrente_chave	fin_conta_corrente_chave	
+Chave de pesquisa da Conta Corrente
+Retorno ListarContasCorrentes: Lista de contas correntes.
+Exemplo:
+{
+  "nCodCC": 0,
+  "cCodCCInt": ""
+}
+ExcluirContaCorrente
+Excluir a Conta Corrente
+
+Parâmetros:
+ 	fin_conta_corrente_chave	fin_conta_corrente_chave	
+Chave de pesquisa da Conta Corrente
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "nCodCC": 0,
+  "cCodCCInt": ""
+}
+IncluirContaCorrente
+Inclui uma conta corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+ListarContasCorrentes
+Listar Contas Correntes
+
+Parâmetros:
+ 	fin_conta_corrente_listar_request	fin_conta_corrente_listar_request	
+Retorno da solicitação da listagem de contas correntes cadastradas no Omie.
+Retorno fin_conta_corrente_listar_response:
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+ListarResumoContasCorrentes
+Listar resumida de Contas correntes.
+
+Parâmetros:
+ 	fin_conta_corrente_resumo_request	fin_conta_corrente_resumo_request	
+Solicitação da listagem resumida de contas correntes.
+Retorno fin_conta_corrente_resumo_response:
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+PesquisarContaCorrente
+DEPRECATED
+
+Parâmetros:
+ 	fin_conta_corrente_pesquisar	fin_conta_corrente_pesquisar	
+DEPRECATED
+Retorno fin_conta_corrente_pesquisar_resposta: DEPRECATED
+Exemplo:
+{
+  "pagina": 1,
+  "registros_por_pagina": 100,
+  "apenas_importado_api": "N"
+}
+UpsertContaCorrente
+Upsert da Conta Corrente
+
+Parâmetros:
+ 	ListarContasCorrentes	ListarContasCorrentes	
+Lista de contas correntes.
+Retorno fin_conta_corrente_cadastro_response: Response do cadastro do conta corrente.
+Exemplo:
+{
+  "cCodCCInt": "MyCC0001",
+  "tipo_conta_corrente": "CX",
+  "codigo_banco": "999",
+  "descricao": "Caixinha",
+  "saldo_inicial": 0
+}
+UpsertContaCorrentePorLote
+Upsert por lote de Conta Corrente
+
+Parâmetros:
+ 	fin_conta_corrente_lote_request	fin_conta_corrente_lote_request	
+Request do Lote da Conta Corrente
+Retorno fin_conta_corrente_lote_response: Response do conta corrente
+Exemplo:
+{
+  "lote": 1,
+  "fin_conta_corrente_cadastro": [
+    {
+      "cCodCCInt": "MyCC0001",
+      "tipo_conta_corrente": "CX",
+      "codigo_banco": "999",
+      "descricao": "Caixinha",
+      "saldo_inicial": 0
+    }
+  ]
+}
+Tipos Complexos
+ListarContasCorrentes
+Lista de contas correntes.
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+tipo_conta_corrente	string2	Tipo da Conta Corrente.+
+codigo_banco	string3	Código do banco.+
+descricao	string40	Descrição da conta corrente.
+codigo_agencia	string10	Código da Agência
+numero_conta_corrente	string25	Número da conta corrente.
+saldo_inicial	decimal	Saldo Inicial da Conta Corrente
+saldo_data	string10	Data do Saldo Inicial da Conta Corrente
+valor_limite	decimal	Valor do Limite do Crédito
+nao_fluxo	string1	Não exibir no Fluxo de Caixa
+nao_resumo	string1	Não exibir no Resumo de Finanças
+observacao	text	Observação
+cobr_sn	string1	Indica se realiza Cobrança Bancária para a conta corrente [S/N]
+per_juros	decimal	Percentual de Juros ao Mês
+per_multa	decimal	Percentual de Multa
+bol_instr1	string80	Mensagem de Instrução do Boleto - Linha 1
+bol_instr2	string80	Mensagem de Instrução do Boleto - Linha 2
+bol_instr3	string80	Mensagem de Instrução do Boleto - Linha 3
+bol_instr4	string80	Mensagem de Instrução do Boleto - Linha 4
+bol_sn	string1	Indica se emite Boletos de Cobrança [S/N]
+pix_sn	string1	Indica se emite PIX [S/N]
+cnab_esp	string2	Espécie padrão para a Remessa de Cobrança
+cobr_esp	string3	Espécie padrão para o Boleto de Cobrança
+dias_rcomp	integer	Dias para Compensação dos Recebimentos
+modalidade	string3	Modalidade da Cobrança
+cancinstr	string3	Código de Instrução de Cancelamento, Baixa ou Devolução
+pdv_enviar	string1	Utiliza a Conta Corrente no OmiePDV
+pdv_sincr_analitica	string1	Sincroniza os Movimentos de Forma Análitica para o PDV
+pdv_dias_venc	integer	Dias para vencimento
+pdv_num_parcelas	integer	Número máximo de parcelas do Cartão de Credito
+pdv_tipo_tef	integer	Tipo de TEF
+pdv_cod_adm	integer	Código da Administradora de Cartões
+pdv_limite_pacelas	integer	Limite máximo de parcelas
+pdv_taxa_loja	decimal	Taxa de Juros da Loja
+pdv_taxa_adm	decimal	Taxa da Administradora de Cartões
+pdv_categoria	string20	Código da Categoria para o PDV.
+pdv_bandeira	string70	Bandeira do Cartão.+
+cTipoCartao	string1	Tipo de Cartão para Administradoras de Cartão.+
+cEstabelecimento	string70	Indica o código do estabelecimento.
+nome_gerente	string40	Nome do Gerente da Conta Corrente.
+ddd	string5	DDD do Telefone de Contato do Gerente da Agência
+telefone	string15	Telefone de Contato do Gerente da Agência
+email	string200	E-mail do Gerente da Conta Corrente
+endereco	string50	Endereço da Agência
+numero	string5	Número do Endereço
+bairro	string60	Bairro
+complemento	string15	Complemento do Número do Endereço
+estado	string2	Estado da Agência
+cidade	string40	Cidade da Agência
+cep	string9	CEP da Agência
+codigo_pais	string4	Código do País
+data_inc	string10	Data de Inclusão
+hora_inc	string8	Hora de Inclusão
+user_inc	string10	Usuário da Inclusão
+data_alt	string10	Data de alteração
+hora_alt	string8	Hora de Alteração
+user_alt	string10	Usuário de Alteração
+importado_api	string1	Registro importado pela API
+bloqueado	string1	Registro Bloqueado pela API
+inativo	string1	Indica se o cadastro da conta corrente está inativo (S/N).
+ListarContasCorrentesArray
+Este parâmetro é um array do tipo ListarContasCorrentes
+
+Lista de ListarContasCorrentes
+
+conta_corrente_lista
+Lista de contas correntes
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+descricao	string40	Descrição da conta corrente.
+codigo_banco	string3	Código do banco.+
+codigo_agencia	string10	Código da Agência
+conta_corrente	string25	Número da conta corrente.
+nome_gerente	string40	Nome do Gerente da Conta Corrente.
+tipo	string2	Tipo da Conta Corrente.+
+tipo_comunicacao	text	Tipo de comunicação 
+cSincrAnalitica	string1	Sincroniza os Movimentos de Forma Análitica para o PDV
+nTpTef	integer	Tipo de TEF
+nTaxaAdm	decimal	Taxa da Administradora de Cartões
+nDiasVenc	integer	Dias para vencimento
+nNumParc	integer	Número máximo de parcelas do Cartão de Credito
+nCodAdm	integer	Código da Administradora de Cartões
+cUtilPDV	string1	Utiliza a Conta Corrente no OmiePDV
+cCategoria	string20	Código da Categoria para o PDV.
+cModalidade	string3	Modalidade da Cobrança
+saldo_inicial	decimal	Saldo Inicial da Conta Corrente
+saldo_data	string10	Data do Saldo Inicial da Conta Corrente
+valor_limite	decimal	Valor do Limite do Crédito
+cTipoCartao	string1	Tipo de Cartão para Administradoras de Cartão.+
+conta_corrente_listaArray
+Este parâmetro é um array do tipo conta_corrente_lista
+
+Lista de conta_corrente_lista
+
+fin_conta_corrente_cadastro
+Lista de contas correntes.
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+tipo_conta_corrente	string2	Tipo da Conta Corrente.+
+codigo_banco	string3	Código do banco.+
+descricao	string40	Descrição da conta corrente.
+codigo_agencia	string10	Código da Agência
+numero_conta_corrente	string25	Número da conta corrente.
+saldo_inicial	decimal	Saldo Inicial da Conta Corrente
+saldo_data	string10	Data do Saldo Inicial da Conta Corrente
+valor_limite	decimal	Valor do Limite do Crédito
+nao_fluxo	string1	Não exibir no Fluxo de Caixa
+nao_resumo	string1	Não exibir no Resumo de Finanças
+observacao	text	Observação
+cobr_sn	string1	Indica se realiza Cobrança Bancária para a conta corrente [S/N]
+per_juros	decimal	Percentual de Juros ao Mês
+per_multa	decimal	Percentual de Multa
+bol_instr1	string80	Mensagem de Instrução do Boleto - Linha 1
+bol_instr2	string80	Mensagem de Instrução do Boleto - Linha 2
+bol_instr3	string80	Mensagem de Instrução do Boleto - Linha 3
+bol_instr4	string80	Mensagem de Instrução do Boleto - Linha 4
+bol_sn	string1	Indica se emite Boletos de Cobrança [S/N]
+pix_sn	string1	Indica se emite PIX [S/N]
+cnab_esp	string2	Espécie padrão para a Remessa de Cobrança
+cobr_esp	string3	Espécie padrão para o Boleto de Cobrança
+dias_rcomp	integer	Dias para Compensação dos Recebimentos
+modalidade	string3	Modalidade da Cobrança
+cancinstr	string3	Código de Instrução de Cancelamento, Baixa ou Devolução
+pdv_enviar	string1	Utiliza a Conta Corrente no OmiePDV
+pdv_sincr_analitica	string1	Sincroniza os Movimentos de Forma Análitica para o PDV
+pdv_dias_venc	integer	Dias para vencimento
+pdv_num_parcelas	integer	Número máximo de parcelas do Cartão de Credito
+pdv_tipo_tef	integer	Tipo de TEF
+pdv_cod_adm	integer	Código da Administradora de Cartões
+pdv_limite_pacelas	integer	Limite máximo de parcelas
+pdv_taxa_loja	decimal	Taxa de Juros da Loja
+pdv_taxa_adm	decimal	Taxa da Administradora de Cartões
+pdv_categoria	string20	Código da Categoria para o PDV.
+pdv_bandeira	string70	Bandeira do Cartão.+
+cTipoCartao	string1	Tipo de Cartão para Administradoras de Cartão.+
+cEstabelecimento	string70	Indica o código do estabelecimento.
+nome_gerente	string40	Nome do Gerente da Conta Corrente.
+ddd	string5	DDD do Telefone de Contato do Gerente da Agência
+telefone	string15	Telefone de Contato do Gerente da Agência
+email	string200	E-mail do Gerente da Conta Corrente
+endereco	string50	Endereço da Agência
+numero	string5	Número do Endereço
+bairro	string60	Bairro
+complemento	string15	Complemento do Número do Endereço
+estado	string2	Estado da Agência
+cidade	string40	Cidade da Agência
+cep	string9	CEP da Agência
+codigo_pais	string4	Código do País
+data_inc	string10	Data de Inclusão
+hora_inc	string8	Hora de Inclusão
+user_inc	string10	Usuário da Inclusão
+data_alt	string10	Data de alteração
+hora_alt	string8	Hora de Alteração
+user_alt	string10	Usuário de Alteração
+importado_api	string1	Registro importado pela API
+bloqueado	string1	Registro Bloqueado pela API
+inativo	string1	Indica se o cadastro da conta corrente está inativo (S/N).
+fin_conta_corrente_cadastroArray
+Este parâmetro é um array do tipo fin_conta_corrente_cadastro
+
+Lista de fin_conta_corrente_cadastro
+
+fin_conta_corrente_cadastro_response
+Response do cadastro do conta corrente.
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+cCodStatus	string4	Código do Status
+cDesStatus	text	Descrição do status do processamento.+
+fin_conta_corrente_chave
+Chave de pesquisa da Conta Corrente
+
+nCodCC	integer	Código da conta corrente no Omie.
+cCodCCInt	string20	Código de Integração do Parceiro.
+fin_conta_corrente_listar_request
+codigo	integer	Código da conta corrente no Omie.
+codigo_integracao	string20	Código de Integração do Parceiro.
+pagina	integer	Número da página que será listada.
+registros_por_pagina	integer	Número de registros retornados
+apenas_importado_api	string1	Tipo de Cartão para Administradoras de Cartão.+
+ordenar_por	string100	Ordenar o resultado da página por:+
+ordem_descrescente	string1	Indica se a ordem de exibição é decrescente caso seja informado "S".
+filtrar_por_data_de	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_por_data_ate	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_apenas_inclusao	string1	Filtrar apenas registros incluídos (S/N)
+filtrar_apenas_alteracao	string1	Filtrar apenas registros alterados (S/N)
+filtrar_apenas_ativo	string1	Filtrar apenas contas correntes ativas
+fin_conta_corrente_listar_response
+pagina	integer	Número da página que será listada.
+total_de_paginas	integer	Total de páginas encontradas.
+registros	integer	Número de registros retornados
+total_de_registros	integer	Total de registros encontrados.
+ListarContasCorrentes	ListarContasCorrentesArray	Lista de contas correntes.
+fin_conta_corrente_lote_request
+Request do Lote da Conta Corrente
+
+lote	integer	Número do lote
+fin_conta_corrente_cadastro	fin_conta_corrente_cadastroArray	Lista de contas correntes.
+fin_conta_corrente_lote_response
+Response do conta corrente
+
+lote	integer	Número do lote
+cCodStatus	string4	Código do Status
+cDesStatus	text	Descrição do status do processamento.+
+fin_conta_corrente_pesquisar
+DEPRECATED
+
+codigo	integer	Código da conta corrente no Omie.
+codigo_integracao	string20	Código de Integração do Parceiro.
+pagina	integer	Número da página que será listada.
+registros_por_pagina	integer	Número de registros retornados
+apenas_importado_api	string1	Tipo de Cartão para Administradoras de Cartão.+
+ordenar_por	string100	Ordenar o resultado da página por:+
+ordem_descrescente	string1	Indica se a ordem de exibição é decrescente caso seja informado "S".
+filtrar_por_data_de	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_por_data_ate	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_apenas_inclusao	string1	Filtrar apenas registros incluídos (S/N)
+filtrar_apenas_alteracao	string1	Filtrar apenas registros alterados (S/N)
+fin_conta_corrente_pesquisar_resposta
+DEPRECATED
+
+pagina	integer	Número da página que será listada.
+total_de_paginas	integer	Total de páginas encontradas.
+registros	integer	Número de registros retornados
+total_de_registros	integer	Total de registros encontrados.
+conta_corrente_lista	conta_corrente_listaArray	Lista de contas correntes
+fin_conta_corrente_resumo_request
+codigo	integer	Código da conta corrente no Omie.
+codigo_integracao	string20	Código de Integração do Parceiro.
+pagina	integer	Número da página que será listada.
+registros_por_pagina	integer	Número de registros retornados
+apenas_importado_api	string1	Tipo de Cartão para Administradoras de Cartão.+
+ordenar_por	string100	Ordenar o resultado da página por:+
+ordem_descrescente	string1	Indica se a ordem de exibição é decrescente caso seja informado "S".
+filtrar_por_data_de	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_por_data_ate	string10	Filtrar lançamentos incluídos e/ou alterados até a data
+filtrar_apenas_inclusao	string1	Filtrar apenas registros incluídos (S/N)
+filtrar_apenas_alteracao	string1	Filtrar apenas registros alterados (S/N)
+filtrar_apenas_ativo	string1	Filtrar apenas contas correntes ativas
+fin_conta_corrente_resumo_response
+pagina	integer	Número da página que será listada.
+total_de_paginas	integer	Total de páginas encontradas.
+registros	integer	Número de registros retornados
+total_de_registros	integer	Total de registros encontrados.
+conta_corrente_lista	conta_corrente_listaArray	Lista de contas correntes
+omie_fail
+code	integer	Codigo do erro
+description	text	Descricao do erro
+referer	text	Origem do erro
+fatal	boolean	Indica se eh um erro fatal

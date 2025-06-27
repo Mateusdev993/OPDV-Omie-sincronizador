@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}Configuration - OPDV-Omie Integration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Configuração de API</h1>
+        <p class="text-muted">Configure suas credenciais de API OPDV e OMIE para ativar a sincronização de dados.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- OPDV Configuration -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-database me-2"></i>Configuração do OPDV
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="opdv_url" class="form-label">API URL</label>
+                        <input type="url" class="form-control" id="opdv_url" name="opdv_url" 
+                               value="{{ config.opdv_url }}" 
+                               placeholder="https://api.opdv.com.br"
+                               required>
+                        <div class="form-text">Digite sua URL da base da API OPDV</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="opdv_store_id" class="form-label">Store ID</label>
+                        <input type="text" class="form-control" id="opdv_store_id" name="opdv_store_id" 
+                               value="{{ config.opdv_store_id }}" 
+                               placeholder="123456"
+                               required>
+                        <div class="form-text">Digite o ID da sua loja (será adicionado ao URL da API)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="opdv_api_key" class="form-label">API Key</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="opdv_api_key" name="opdv_api_key" 
+                                   value="{{ config.opdv_api_key }}" 
+                                   placeholder="Enter your OPDV API key"
+                                   required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('opdv_api_key')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-text">Sua chave de autenticação da API OPDV</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Salvar o OPDV Config
+                        </button>
+                        <button type="button" class="btn btn-outline-info" onclick="testConnection('opdv')">
+                            <i class="fas fa-sync me-1"></i>Testar conexão
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Omie Configuration -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-cloud me-2"></i>Configuração Omie
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="omie_app_key" class="form-label">App Key</label>
+                        <input type="text" class="form-control" id="omie_app_key" name="omie_app_key" 
+                               value="{{ config.omie_app_key }}" 
+                               placeholder="Enter your Omie App Key"
+                               required>
+                        <div class="form-text">Sua chave de aplicativo omie</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="omie_app_secret" class="form-label">App Secret</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="omie_app_secret" name="omie_app_secret" 
+                                   value="{{ config.omie_app_secret }}" 
+                                   placeholder="Enter your Omie App Secret"
+                                   required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('omie_app_secret')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-text">Seu segredo de aplicação omie</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Salvar Omie Config
+                        </button>
+                        <button type="button" class="btn btn-outline-info" onclick="testConnection('omie')">
+                            <i class="fas fa-sync me-1"></i>Testar conexão
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Configuration Help -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-question-circle me-2"></i>Ajuda de configuração
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>OPDV Setup</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Obtenha credenciais de API do seu painel de administrador OPDV</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Obtenha seu ID da loja no painel OPDV</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Verifique se sua chave da API tem permissões de leitura para pedidos e clientes</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Verifique se o URL da API está acessível a partir deste servidor</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Configuração Omie</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Registre sua inscrição no portal de desenvolvedores OMIE</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Gerar chave de aplicativo e segredo do aplicativo</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Garantir permissões para a criação de clientes e pedidos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Nota de segurança:</strong> Suas credenciais da API são armazenadas com segurança na sessão. Para uso da produção, considere o uso de variáveis de ambiente ou uma loja de credenciais seguras.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Environment Variables Info -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-server me-2"></i>Variáveis de ambiente
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Você também pode configurar credenciais usando variáveis de ambiente:</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Variáveis OPDV</h6>
+                        <code>OPDV_URL=https://api.opdv.com.br</code><br>
+                        <code>OPDV_STORE_ID=your-store-id</code><br>
+                        <code>OPDV_API_KEY=your-api-key</code>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Variáveis omie</h6>
+                        <code>OMIE_APP_KEY=your-app-key</code><br>
+                        <code>OMIE_APP_SECRET=your-app-secret</code>
+                    </div>
+                </div>
+                <div class="alert alert-warning mt-3">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    As variáveis de ambiente têm precedência sobre a configuração do formulário durante os testes de conexão.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function togglePassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    const button = field.nextElementSibling;
+    const icon = button.querySelector('i');
+    
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+    } else {
+        field.type = 'password';
+        icon.className = 'fas fa-eye';
+    }
+}
+
+function testConnection(service) {
+    const button = event.target;
+    const originalText = button.innerHTML;
+    
+    button.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Testing...';
+    button.disabled = true;
+    
+    fetch(`/test_connection/${service}`)
+        .then(response => response.json())
+        .then(data => {
+            const alertClass = data.success ? 'alert-success' : 'alert-danger';
+            const iconClass = data.success ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show mt-3`;
+            alertDiv.innerHTML = `
+                <i class="fas ${iconClass} me-2"></i>
+                <strong>${service.toUpperCase()} Connection Test:</strong> ${data.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            // Insert alert at the top of the page
+            const container = document.querySelector('.container');
+            const firstRow = container.querySelector('.row');
+            container.insertBefore(alertDiv, firstRow);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-danger alert-dismissible fade show mt-3';
+            alertDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong>Connection Error:</strong> ${error.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            const container = document.querySelector('.container');
+            const firstRow = container.querySelector('.row');
+            container.insertBefore(alertDiv, firstRow);
+        })
+        .finally(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        });
+}
+
+// Form validation
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+    });
+});
+</script>
+{% endblock %}

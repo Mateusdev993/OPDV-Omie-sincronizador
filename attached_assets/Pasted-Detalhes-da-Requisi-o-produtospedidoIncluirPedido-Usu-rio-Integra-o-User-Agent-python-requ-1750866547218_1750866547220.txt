@@ -1,0 +1,81 @@
+Detalhes da Requisição:
+produtospedidoIncluirPedido
+Usuário: 	Integração
+User-Agent: 	python-requests/2.32.4
+IP de Origem: 	34.168.38.152
+Requisição:
+{
+   cabecalho: {
+      codigo_pedido_integracao: "92456084",
+      codigo_cliente: 4327992111,
+      data_previsao: "25/06/2025",
+      etapa: "10",
+      codigo_parcela: "999",
+      quantidade_itens: 3
+   },
+   det: [
+      {
+         ide: {
+            codigo_item_integracao: "92456084-1"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_92456084_1",
+            quantidade: 1,
+            valor_unitario: 149.9,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "92456084-2"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_92456084_2",
+            quantidade: 3,
+            valor_unitario: 3.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "92456084-3"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_92456084_3",
+            quantidade: 1,
+            valor_unitario: 16.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         }
+      }
+   ],
+   informacoes_adicionais: {
+      codigo_categoria: "1.01.01",
+      codigo_conta_corrente: 4327992111,
+      consumidor_final: "S",
+      enviar_email: "N"
+   }
+}
+Resposta:
+Erros encontrados:
+[
+   {
+      CODIGO: 1140,
+      MENSAGEM: "Conta Corrente não cadastrada para o Código [4327992111] ! - tag: [codigo_conta_corrente]",
+      ORIGEM: ""
+   },
+   {
+      CODIGO: 7102,
+      MENSAGEM: "Ocorreram erros na execução da operação [IncluirPedido] !",
+      ORIGEM: ""
+   }
+]
+{}

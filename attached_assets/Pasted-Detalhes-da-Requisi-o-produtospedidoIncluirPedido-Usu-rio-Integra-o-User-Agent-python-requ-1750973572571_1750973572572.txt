@@ -1,0 +1,89 @@
+Detalhes da Requisição:
+produtospedidoIncluirPedido
+Usuário: 	Integração
+User-Agent: 	python-requests/2.32.4
+IP de Origem: 	34.82.112.208
+Requisição:
+{
+   cabecalho: {
+      codigo_pedido_integracao: "74780830",
+      codigo_cliente: 4328945199,
+      data_previsao: "26/06/2025",
+      etapa: "10",
+      codigo_parcela: "000",
+      quantidade_itens: 3
+   },
+   det: [
+      {
+         ide: {
+            codigo_item_integracao: "74780830_1"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_74780830_1",
+            descricao: "Heineken Lata 350ml [ITEM_1]",
+            quantidade: 1,
+            valor_unitario: 8.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Heineken Lata 350ml [ITEM_1]\n\n=== INFORMAÇÕES DE PAGAMENTO ===\nTotal de formas de pagamento: 1\n1. iFood (PAGO ONLINE) → Transferência bancária/Digital (Código: 18): R$ 55.74\nTOTAL PAGO: R$ 55.74\n==================================="
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "74780830_2"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_74780830_2",
+            descricao: "Fandangos Queijo [ITEM_2]",
+            quantidade: 1,
+            valor_unitario: 7.96,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Fandangos Queijo [ITEM_2]\n\n=== INFORMAÇÕES DE PAGAMENTO ===\nTotal de formas de pagamento: 1\n1. iFood (PAGO ONLINE) → Transferência bancária/Digital (Código: 18): R$ 55.74\nTOTAL PAGO: R$ 55.74\n==================================="
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "74780830_3"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_74780830_3",
+            descricao: "Heineken Latão 473ml [ITEM_3]",
+            quantidade: 2,
+            valor_unitario: 11.9,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Heineken Latão 473ml [ITEM_3]\n\n=== INFORMAÇÕES DE PAGAMENTO ===\nTotal de formas de pagamento: 1\n1. iFood (PAGO ONLINE) → Transferência bancária/Digital (Código: 18): R$ 55.74\nTOTAL PAGO: R$ 55.74\n==================================="
+         }
+      }
+   ],
+   informacoes_adicionais: {
+      codigo_categoria: "1.01.01",
+      codigo_conta_corrente: 4328945203,
+      consumidor_final: "S",
+      enviar_email: "N",
+      codigo_meio_pagamento: "18"
+   }
+}
+Resposta:
+Erros encontrados:
+[
+   {
+      CODIGO: 5001,
+      MENSAGEM: "Tag [CODIGO_MEIO_PAGAMENTO] não faz parte da estrutura do tipo complexo [informacoes_adicionais]!",
+      ORIGEM: ""
+   }
+]
+{}

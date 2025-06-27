@@ -1,0 +1,24 @@
+INFO:services.opdv_service:Retrieved 100 orders from OPDV
+INFO:services.opdv_service:Extracted 85 unique customers from orders
+INFO:root:Extracted 85 customers
+DEBUG:urllib3.connectionpool:https://api.opdv.com.br:443 "GET /stores HTTP/1.1" 200 259
+DEBUG:services.opdv_service:OPDV test response status: 200
+DEBUG:services.opdv_service:OPDV test response content: {"stores":[{"id":362,"name":"Tele Trago POA","corporateName":"TELE TRAGO EIRELI","cnpj":"11285990000178","state":"RS","city":"Porto Alegre","street":"Rua Miguel Tostes","neighborhood":"Rio Branco","po
+INFO:services.sync_service:Processing 0 valid customers (skipped 1 without CPF/CNPJ)
+WARNING:services.sync_service:Skipping 1 customers without CPF/CNPJ
+INFO:services.sync_service:Starting customer synchronization: 0 valid customers
+INFO:services.sync_service:Starting order synchronization: 10 orders
+WARNING:services.sync_service:Pedido '22971' pulado: cliente 4246449 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '22972' pulado: cliente 7178969 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '9226' pulado: cliente 28131315 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '9588' pulado: cliente 4467503 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '3898' pulado: cliente 4554178 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '4199' pulado: cliente 682425 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido 'None' pulado: cliente 807486 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '22973' pulado: cliente 824987 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido '7051' pulado: cliente 5423353 sem CPF/CNPJ
+WARNING:services.sync_service:Pedido 'None' pulado: cliente 7055158 sem CPF/CNPJ
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.opdv.com.br
+DEBUG:urllib3.connectionpool:https://api.opdv.com.br:443 "GET /stores HTTP/1.1" 200 259
+DEBUG:services.opdv_service:OPDV test response status: 200
+DEBUG:services.opdv_service:OPDV test response content: {"stores":[{"id":362,"name":"Tele Trago POA","corporateName":"TELE TRAGO EIRELI","cnpj":"11285990000178","state":"RS","city":"Porto Alegre","street":"Rua Miguel Tostes","neighborhood":"Rio Branco","po

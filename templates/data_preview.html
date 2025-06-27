@@ -1,0 +1,417 @@
+{% extends "base.html" %}
+
+{% block title %}Data Preview - OPDV-Omie Integration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Visualização de dados</h1>
+        {% if preview_data %}
+        <p class="text-muted">Revise os dados extraídos do OPDV antes de sincronizar o OMIE.</p>
+        {% else %}
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Nenhum dado disponível para visualização. Por favor <a href="{{ url_for('extract_data') }}" class="alert-link">extrair dados</a>primeiro.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if preview_data %}
+<!-- Summary Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-primary">{{ preview_data.total_customers if preview_data.total_customers else preview_data.customers|length }}</h3>
+                <p class="card-text">Customers{% if preview_data.total_customers and preview_data.total_customers > 50 %} ({{ preview_data.customers|length }} shown){% endif %}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-info">{{ preview_data.total_orders if preview_data.total_orders else preview_data.orders|length }}</h3>
+                <p class="card-text">Orders{% if preview_data.total_orders and preview_data.total_orders > 50 %} ({{ preview_data.orders|length }} shown){% endif %}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                {% set total_items = preview_data.orders|map(attribute='items')|map('length')|sum %}
+                <h3 class="text-success">{{ total_items if total_items else 0 }}</h3>
+                <p class="card-text">Itens de pedido</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                {% set total_value = preview_data.orders|sum(attribute='total_amount') %}
+                <h3 class="text-warning">R$ {{ "%.2f"|format(total_value if total_value else 0) }}</h3>
+                <p class="card-text">Valor total</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#syncModal" disabled title="Selecione itens para sincronizar">
+                        <i class="fas fa-sync me-1"></i>Sincronizar com Omie
+                    </button>
+                    <a href="{{ url_for('extract_data') }}" class="btn btn-primary">
+                        <i class="fas fa-refresh me-1"></i>Atualizar Dados
+                    </a>
+                    <a href="{{ url_for('clear_preview') }}" class="btn btn-outline-warning">
+                        <i class="fas fa-trash me-1"></i>Limpar Preview
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Voltar ao Painel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sync Logs Section -->
+<div class="row mb-4" id="syncLogsSection" style="display: none;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-clipboard-list me-2"></i>Logs de Sincronização
+                    <button type="button" class="btn btn-sm btn-outline-light float-end" onclick="clearSyncLogs()">
+                        <i class="fas fa-trash-alt me-1"></i>Limpar
+                    </button>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="syncLogsContainer" class="bg-dark text-light p-3 rounded" style="max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                    <div class="text-muted">Aguardando operações de sincronização...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Tabs -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="dataTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="customers-tab" data-bs-toggle="tab" 
+                                data-bs-target="#customers" type="button" role="tab">
+                            <i class="fas fa-users me-1"></i>Clientes ({{ preview_data.customers|length }})
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="orders-tab" data-bs-toggle="tab" 
+                                data-bs-target="#orders" type="button" role="tab">
+                            <i class="fas fa-shopping-cart me-1"></i>Pedidos ({{ preview_data.orders|length }})
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="dataTabContent">
+                    <!-- Customers Tab -->
+                    <div class="tab-pane fade show active" id="customers" role="tabpanel">
+                        {% if preview_data.customers %}
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="customersTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAllCustomers" onchange="window.toggleAllCustomers ? toggleAllCustomers(this) : console.log('toggleAllCustomers not loaded')">
+                                        </th>
+                                        <th>ID Externo</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Telefone</th>
+                                        <th>CPF/CNPJ</th>
+                                        <th>Cidade</th>
+                                        <th>Estado</th>
+                                        <th>Origem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for customer in preview_data.customers %}
+                                    <tr class="{{ 'table-warning' if not customer.document or not customer.document.strip() else '' }}">
+                                        <td>
+                                            <input type="checkbox" class="customer-checkbox" data-customer-id="{{ customer.external_id }}" 
+                                                   onchange="window.updateSyncButton ? updateSyncButton() : console.log('updateSyncButton not loaded')" 
+                                                   {{ 'disabled title="Cliente precisa de CPF/CNPJ válido"' if not customer.document or not customer.document.strip() else '' }}>
+                                        </td>
+                                        <td>{{ customer.external_id }}</td>
+                                        <td>{{ customer.name }}</td>
+                                        <td>{{ customer.email }}</td>
+                                        <td>{{ customer.phone }}</td>
+                                        <td>
+                                            {{ customer.document }}
+                                            {% if not customer.document or not customer.document.strip() %}
+                                            <small class="text-warning"><i class="fas fa-exclamation-triangle"></i> Obrigatório para sync</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ customer.address.city if customer.address else '' }}</td>
+                                        <td>{{ customer.address.state if customer.address else '' }}</td>
+                                        <td><span class="badge bg-info">{{ customer.source }}</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>Nenhum cliente encontrado nos dados extraídos.
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Orders Tab -->
+                    <div class="tab-pane fade" id="orders" role="tabpanel">
+                        {% if preview_data.orders %}
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="ordersTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAllOrders" onchange="window.toggleAllOrders ? toggleAllOrders(this) : console.log('toggleAllOrders not loaded')">
+                                        </th>
+                                        <th>ID Externo</th>
+                                        <th>Número Pedido</th>
+                                        <th>Cliente</th>
+                                        <th>Status</th>
+                                        <th>Valor Total</th>
+                                        <th>Qtd Itens</th>
+                                        <th>Data Criação</th>
+                                        <th>Origem</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in preview_data.orders %}
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="order-checkbox" data-order-id="{{ order.external_id }}" onchange="window.updateSyncButton ? updateSyncButton() : console.log('updateSyncButton not loaded')">
+                                        </td>
+                                        <td>{{ order.external_id }}</td>
+                                        <td>{{ order.order_number }}</td>
+                                        <td>{{ order.customer_name }}</td>
+                                        <td>
+                                            <span class="badge bg-{% if order.status == 'completed' %}success{% elif order.status == 'pending' %}warning{% else %}secondary{% endif %}">
+                                                {{ order.status.title() }}
+                                            </span>
+                                        </td>
+                                        <td>R$ {{ "%.2f"|format(order.total_amount) }}</td>
+                                        <td>{% if order.items is sequence and order.items is not string %}{{ order.items|length }}{% else %}0{% endif %}</td>
+                                        <td>{{ order.created_date }}</td>
+                                        <td><span class="badge bg-info">{{ order.source }}</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#orderModal{{ loop.index0 }}">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>Nenhum pedido encontrado nos dados extraídos.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Detail Modals -->
+{% for order in preview_data.orders %}
+<div class="modal fade" id="orderModal{{ loop.index0 }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes do pedido - {{ order.order_number }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Encomendar informações</h6>
+                        <p><strong>ID externo:</strong> {{ order.external_id }}</p>
+                        <p><strong>Cliente:</strong> {{ order.customer_name }}</p>
+                        <p><strong>Status:</strong> {{ order.status.title() }}</p>
+                        <p><strong>Total:</strong> R$ {{ "%.2f"|format(order.total_amount) }}</p>
+                        <p><strong>Criado:</strong> {{ order.created_date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Informações do cliente</h6>
+                        <p><strong>ID do cliente:</strong> {{ order.customer_id }}</p>
+                        <p><strong>Nome:</strong> {{ order.customer_name }}</p>
+                    </div>
+                </div>
+                
+                {% if order.items is sequence and order.items is not string and order.items|length > 0 %}
+                <h6 class="mt-3">Order Items</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID do produto</th>
+                                <th>Nome do produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço unitário</th>
+                                <th>Preço total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if order.items is sequence and order.items is not string %}
+                            {% for item in order.items %}
+                            <tr>
+                                <td>{{ item.product_id }}</td>
+                                <td>{{ item.product_name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>R$ {{ "%.2f"|format(item.unit_price) }}</td>
+                                <td>R$ {{ "%.2f"|format(item.total_price) }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Sync Confirmation Modal -->
+<div class="modal fade" id="syncModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Sincronização</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja sincronizar os itens selecionados com o Omie?</p>
+                <ul id="syncSummary">
+                    <li><span id="selectedCustomersCount">0</span> clientes selecionados</li>
+                    <li><span id="selectedOrdersCount">0</span> pedidos selecionados</li>
+                </ul>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Esta ação criará novos registros no Omie e não pode ser desfeita. 
+                    Verifique se todos os dados estão corretos antes de prosseguir.
+                </div>
+                <div class="alert alert-info" id="syncLimitAlert" style="display: none;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Limite de sincronização:</strong> Máximo 10 itens por vez para evitar sobrecarga da API.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="confirmSyncBtn" onclick="startSync()" disabled>
+                    <i class="fas fa-sync me-1"></i>Confirmar Sincronização
+                </button>
+            </div>
+            
+            <!-- Progress Section -->
+            <div id="syncProgressSection" class="p-3" style="display: none;">
+                <div class="progress mb-2">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                         role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <div class="text-center">
+                    <small id="syncProgressText" class="text-muted">Preparando a sincronização ...</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Initialize DataTables
+    $('#customersTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        order: [[2, 'asc']], // Sort by name (adjusted for checkbox column)
+        columnDefs: [
+            { targets: [0], orderable: false, className: 'text-center' }, // Checkbox column
+            { targets: [1, 8], className: 'text-center' } // ID and Source columns
+        ],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+        }
+    });
+    
+    $('#ordersTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        order: [[7, 'desc']], // Sort by created date desc (adjusted for checkbox column)
+        columnDefs: [
+            { targets: [0], orderable: false, className: 'text-center' }, // Checkbox column
+            { targets: [9], orderable: false, className: 'text-center' }, // Actions column
+            { targets: [1, 4, 6, 8], className: 'text-center' }, // ID, Status, Items, Source
+            { targets: [5], className: 'text-end' } // Total amount
+        ],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+        }
+    });
+});
+
+// Export functions
+function exportToCSV(tableId, filename) {
+    const table = document.getElementById(tableId);
+    const rows = table.querySelectorAll('tr');
+    const csv = [];
+    
+    for (let i = 0; i < rows.length; i++) {
+        const row = [];
+        const cols = rows[i].querySelectorAll('td, th');
+        
+        for (let j = 0; j < cols.length - 1; j++) { // Exclude actions column
+            row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+        }
+        
+        csv.push(row.join(','));
+    }
+    
+    const csvContent = 'data:text/csv;charset=utf-8,' + csv.join('\n');
+    const encodedUri = encodeURI(csvContent);
+    
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    
+    link.click();
+    document.body.removeChild(link);
+}
+</script>
+{% endblock %}

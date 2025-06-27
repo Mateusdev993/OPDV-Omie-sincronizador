@@ -1,0 +1,253 @@
+PedidoVenda
+Endpoint
+WSDL
+PHP SOAP
+JSON
+Endpoint URI
+https://app.omie.com.br/api/v1/produtos/pedidovenda/
+Métodos
+Veja abaixo a documentação de cada método disponível para este serviço.
+
+AdicionarPedido
+
+Parâmetros:
+ 	AdicionarPedidoRequest	AdicionarPedidoRequest	
+Estrutura para Inclusão de Pedido de Venda
+Retorno AdicionarPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido_integracao": "123456",
+  "codigo_cliente": 45621546,
+  "codigo_cenario_impostos": 65468465,
+  "itens": [
+    {
+      "codigo_produto": 0,
+      "quantidade": 1,
+      "valor_unitario": 1,
+      "cfop": "",
+      "codigo_cenario_impostos_item": 0
+    }
+  ]
+}
+AlterarItemPedido
+Altera um item no pedido de venda.
+
+Parâmetros:
+ 	alterarItemPedidoRequest	alterarItemPedidoRequest	
+Solicitação de Alteração de um item no Pedido de Venda
+Retorno alterarItemPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido": 0,
+  "codigo_item_integracao": "",
+  "codigo_item": 0,
+  "codigo_produto": 0,
+  "quantidade": 1,
+  "valor_unitario": 1
+}
+ExcluirItemPedido
+Exclui um item no pedido de venda.
+
+Parâmetros:
+ 	excluirItemPedidoRequest	excluirItemPedidoRequest	
+Solicitação de Exclusão de um item no Pedido de Venda.
+Retorno excluirItemPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido": 0,
+  "codigo_item_integracao": "",
+  "codigo_item": 0
+}
+ExcluirItensPedido
+Exclui todos os itens do pedido de venda.
+
+Parâmetros:
+ 	excluirItensPedidoRequest	excluirItensPedidoRequest	
+Solicitação de Exclusão de todos os itens no Pedido de Venda.
+Retorno excluirItensPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido": 0
+}
+IncluirItemPedido
+Inclui um item no pedido de venda.
+
+Parâmetros:
+ 	incluirItemPedidoRequest	incluirItemPedidoRequest	
+Solicitação da inclusão de um Item no Pedido de Venda.
+Retorno incluirItemPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido": 0,
+  "codigo_item_integracao": "",
+  "codigo_produto": 0,
+  "quantidade": 1,
+  "valor_unitario": 1,
+  "cfop": "",
+  "codigo_cenario_impostos_item": 0
+}
+TotalizarPedido
+Recalcula os totais do pedido de venda.
+
+Parâmetros:
+ 	totalizarPedidoRequest	totalizarPedidoRequest	
+Realiza a totalização do pedido de venda.
+Retorno totalizarPedidoResponse:
+Exemplo:
+{
+  "codigo_pedido": 0
+}
+Tipos Complexos
+AdicionarPedidoRequest
+codigo_pedido_integracao	string60	Código de integração do pedido de venda.+
+codigo_cliente	integer	Código do cliente.+
+codigo_cliente_integracao	string60	Código de Integração do Cliente+
+data_previsao	string10	Data de Previsão de Faturamento.+
+etapa	string2	Etapa do pedido de venda.+
+codigo_parcela	string3	Código da parcela/Condição de pagamento.+
+origem_pedido	string3	Origem do Pedido.+
+codigo_cenario_impostos	integer	Código do Cenário de Impostos.+
+codigo_categoria	string20	Código da categoria.+
+codigo_conta_corrente	integer	Código da Conta Corrente.+
+numero_pedido_cliente	string30	Número do pedido do cliente.+
+numero_contrato	string60	Número do Contrato de Venda.+
+contato	string100	Contato.+
+consumidor_final	string1	Nota Fiscal para Consumo Final.+
+utilizar_emails	text	Utilizar os seguintes endereços de e-mail.+
+enviar_email	string1	Enviar e-mail com o boleto de cobrança gerado pelo faturamento (juntamente com o DANFE e o XML da NF-e).+
+enviar_pix	string1	Enviar e-mail com o PIX de cobrança gerado pelo faturamento (juntamente com o DANFE e o XML da NF-e).+
+codVend	integer	Código do Vendedor.+
+codProj	integer	Código do Projeto.+
+dados_adicionais_nf	text	Dados adicionais para a Nota Fiscal.+
+itens	itensArray	Array de Itens do pedido de Venda
+AdicionarPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+numero_pedido	string15	Número do Pedido
+alterarItemPedidoRequest
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item	integer	ID do Item do Pedido.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+codigo_produto	integer	ID do Produto.+
+quantidade	decimal	Quantidade+
+cfop	string10	CFOP - Código Fiscal de Operações e Prestações.+
+valor_unitario	decimal	Valor Unitário+
+tipo_desconto	string1	Tipo de Desconto.+
+percentual_desconto	decimal	Percentual de Desconto.+
+valor_desconto	decimal	Valor do Desconto+
+codigo_tabela_preco	integer	Código da tabela de preço.+
+codigo_local_estoque	integer	Código do Local do Estoque.+
+lote_validade	lote_validadeArray	Informações referentes ao lote e validade do produto.+
+codigo_cenario_impostos_item	integer	Código do Cenário de Impostos.+
+numero_pedido_compra	string15	Número do Pedido de Compra.+
+item_pedido_compra	integer	Item do Pedido de Compra.+
+quantidade_trib	decimal	Quantidade do Item - Tributável
+unidade_trib	string6	Código da Unidade - Tributável
+dados_adicionais_item	text	Informações para a Nota Fiscal.+
+nao_movimentar_estoque	string1	Não gerar a saída de estoque deste item ao emitir NF-e.+
+nao_gerar_financeiro	string1	Não gerar conta a receber para este item.+
+nao_somar_total	string1	Indica se não deve somar o item no total do documento.
+codigo_categoria_item	string20	Código da Categoria do item.+
+obs_item	text	Observações do item (elas não serão exibidas na Nota Fisca, mas serão impressas no pedido de venda).+
+alterarItemPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+codigo_item	integer	ID do Item do Pedido.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+excluirItemPedidoRequest
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item	integer	ID do Item do Pedido.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+excluirItemPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+codigo_item	integer	ID do Item do Pedido.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+excluirItensPedidoRequest
+codigo_pedido	integer	ID do pedido do venda.+
+excluirItensPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+incluirItemPedidoRequest
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+codigo_produto	integer	ID do Produto.+
+quantidade	decimal	Quantidade+
+cfop	string10	CFOP - Código Fiscal de Operações e Prestações.+
+valor_unitario	decimal	Valor Unitário+
+tipo_desconto	string1	Tipo de Desconto.+
+percentual_desconto	decimal	Percentual de Desconto.+
+valor_desconto	decimal	Valor do Desconto+
+codigo_tabela_preco	integer	Código da tabela de preço.+
+codigo_local_estoque	integer	Código do Local do Estoque.+
+codigo_cenario_impostos_item	integer	Código do Cenário de Impostos.+
+numero_pedido_compra	string15	Número do Pedido de Compra.+
+item_pedido_compra	integer	Item do Pedido de Compra.+
+quantidade_trib	decimal	Quantidade do Item - Tributável
+unidade_trib	string6	Código da Unidade - Tributável
+dados_adicionais_item	text	Informações para a Nota Fiscal.+
+nao_movimentar_estoque	string1	Não gerar a saída de estoque deste item ao emitir NF-e.+
+nao_gerar_financeiro	string1	Não gerar conta a receber para este item.+
+nao_somar_total	string1	Indica se não deve somar o item no total do documento.
+codigo_categoria_item	string20	Código da Categoria do item.+
+obs_item	text	Observações do item (elas não serão exibidas na Nota Fisca, mas serão impressas no pedido de venda).+
+lote_validade	lote_validadeArray	Informações referentes ao lote e validade do produto.+
+incluirItemPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_item_integracao	string30	Código de Integração do Item do Pedido de Venda.+
+codigo_item	integer	ID do Item do Pedido.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+
+itens
+Array de Itens do pedido de Venda
+
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_produto	integer	ID do Produto.+
+quantidade	decimal	Quantidade+
+cfop	string10	CFOP - Código Fiscal de Operações e Prestações.+
+valor_unitario	decimal	Valor Unitário+
+tipo_desconto	string1	Tipo de Desconto.+
+percentual_desconto	decimal	Percentual de Desconto.+
+valor_desconto	decimal	Valor do Desconto+
+codigo_tabela_preco	integer	Código da tabela de preço.+
+codigo_local_estoque	integer	Código do Local do Estoque.+
+codigo_cenario_impostos_item	integer	Código do Cenário de Impostos.+
+numero_pedido_compra	string15	Número do Pedido de Compra.+
+item_pedido_compra	integer	Item do Pedido de Compra.+
+quantidade_trib	decimal	Quantidade do Item - Tributável
+unidade_trib	string6	Código da Unidade - Tributável
+dados_adicionais_item	text	Informações para a Nota Fiscal.+
+nao_movimentar_estoque	string1	Não gerar a saída de estoque deste item ao emitir NF-e.+
+nao_gerar_financeiro	string1	Não gerar conta a receber para este item.+
+nao_somar_total	string1	Indica se não deve somar o item no total do documento.
+codigo_categoria_item	string20	Código da Categoria do item.+
+obs_item	text	Observações do item (elas não serão exibidas na Nota Fisca, mas serão impressas no pedido de venda).+
+lote_validade	lote_validadeArray	Informações referentes ao lote e validade do produto.+
+itensArray
+Este parâmetro é um array do tipo itens
+
+Lista de itens
+
+lote_validade
+nIdLote	integer	Id do Lote do produto.+
+nQtdLote	decimal	Informe aqui a quantidade do Lote para o produto.+
+lote_validadeArray
+Este parâmetro é um array do tipo lote_validade
+
+Lista de lote_validade
+
+omie_fail
+code	integer	Codigo do erro
+description	text	Descricao do erro
+referer	text	Origem do erro
+fatal	boolean	Indica se eh um erro fatal
+totalizarPedidoRequest
+codigo_pedido	integer	ID do pedido do venda.+
+totalizarPedidoResponse
+codigo_pedido	integer	ID do pedido do venda.+
+codigo_status	string4	Código do status do processamento.+
+descricao_status	text	Descrição do status do processamento.+

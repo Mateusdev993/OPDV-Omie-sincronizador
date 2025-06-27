@@ -1,0 +1,82 @@
+Detalhes da Requisição:
+produtospedidoIncluirPedido
+Usuário: 	Integração
+User-Agent: 	python-requests/2.32.4
+IP de Origem: 	34.169.197.109
+Requisição:
+{
+   cabecalho: {
+      codigo_pedido_integracao: "75243381",
+      codigo_cliente: 4328974073,
+      data_previsao: "26/06/2025",
+      etapa: "10",
+      codigo_parcela: "000",
+      quantidade_itens: 2
+   },
+   det: [
+      {
+         ide: {
+            codigo_item_integracao: "75243381_1"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_75243381_1",
+            descricao: "Concha y Toro Reservado Sauvignon Blanc ",
+            quantidade: 2,
+            valor_unitario: 64.95,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Concha y Toro Reservado Sauvignon Blanc 750ml [ITEM_1] - Pedido: 75243381"
+         }
+      },
+      {
+         ide: {
+            codigo_item_integracao: "75243381_2"
+         },
+         produto: {
+            codigo_produto_integracao: "PROD_75243381_2",
+            descricao: "Água da Pedra sem gás 500ml [ITEM_2]",
+            quantidade: 4,
+            valor_unitario: 3.99,
+            cfop: "5.102",
+            unidade: "UN",
+            tipo_desconto: "V",
+            valor_desconto: 0
+         },
+         observacao: {
+            obs_item: "Água da Pedra sem gás 500ml [ITEM_2] - Pedido: 75243381"
+         }
+      }
+   ],
+   informacoes_adicionais: {
+      codigo_categoria: "1.01.01",
+      codigo_conta_corrente: 4328974075,
+      consumidor_final: "S",
+      enviar_email: "N"
+   },
+   lista_parcelas: {
+      parcela: [
+         {
+            numero_parcela: 1,
+            valor: 129.9,
+            data_vencimento: "26/06/2025",
+            percentual: 100,
+            meio_pagamento: "18"
+         }
+      ]
+   },
+   observacoes: {
+      obs_venda: "Canal: Balcão | Método: N/A | ID: 75243381"
+   }
+}
+Resposta:
+{
+   codigo_pedido: 4328974268,
+   codigo_pedido_integracao: "75243381",
+   codigo_status: "0",
+   descricao_status: "Pedido cadastrado com sucesso!",
+   numero_pedido: "000000000000123"
+}

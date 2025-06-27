@@ -1,0 +1,1521 @@
+OPDV API (1.0.0)
+E-mail: accounts@opdv.com.br
+API pública OPDV
+
+Webhook
+lista webhook existente
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+
+get
+/webhook
+Produção
+
+https://api.opdv.com.br/webhook
+deleta webhook existente
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+
+delete
+/webhook
+Produção
+
+https://api.opdv.com.br/webhook
+Cria um webhook`
+Ao criar um webhook toda atualização feita em pedido ou cardápio é enviada ao webhook cadastrado via POST, o objeto enviado é: { storeId, type, orderId }, orderId é enviado em atualizações de pedido apenas e o type possui 2 valores possíveis: catalog ou OrderUpdate
+
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+Request Body schema: application/json
+webhookUrl	
+string
+
+post
+/webhook
+Produção
+
+https://api.opdv.com.br/webhook
+Request samples
+Payload
+Content type
+application/json
+
+Copy
+{
+"webhookUrl": "https://webhook.com.br/eventos"
+}
+Loja
+lista as lojas de um usuário
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+id	
+number <number>
+name	
+string
+corporateName	
+string
+cnpj	
+number
+404 Nenhuma loja encontrada
+
+get
+/stores
+Produção
+
+https://api.opdv.com.br/stores
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"id": 132456,
+"name": "Loja Ipiranga",
+"corporateName": "Razão Social",
+"cnpj": "31XX12900000"
+}
+]
+Lista as areas de entrega
+Retorna as áreas de entrega e zonas bloqueadas de uma loja
+
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+storeId
+required
+number
+Example: 123
+ID da loja
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+deliveryAreas	
+Array of objects
+blockedAreas	
+Array of objects
+401 Sem acesso a loja selecionada
+
+get
+stores/{storeId}/deliveryarea
+Produção
+
+https://api.opdv.com.brstores/{storeId}/deliveryarea
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+{
+"deliveryAreas": [
+{}
+],
+"blockedAreas": [
+{}
+]
+}
+lista as mesas de uma loja
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+storeId
+required
+number
+Example: 123
+ID da loja
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+id	
+number <number>
+storeId	
+number <number>
+name	
+string
+status	
+number
+type	
+number
+404 Nenhuma loja encontrada
+
+get
+/stores/{storeId}/tables
+Produção
+
+https://api.opdv.com.br/stores/{storeId}/tables
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"id": 132456,
+"storeId": 132456,
+"name": "Mesa 1 / Comanda 1",
+"status": "0/1,  0 = livre 1 = ocupada",
+"type": "0/1,  0 = mesa 1 = comanda"
+}
+]
+lista as comandas de uma loja
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+storeId
+required
+number
+Example: 123
+ID da loja
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+id	
+number <number>
+storeId	
+number <number>
+name	
+string
+status	
+number
+type	
+number
+404 Nenhuma loja encontrada
+
+get
+/stores/{storeId}/accounts
+Produção
+
+https://api.opdv.com.br/stores/{storeId}/accounts
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"id": 132456,
+"storeId": 132456,
+"name": "Mesa 1 / Comanda 1",
+"status": "0/1,  0 = livre 1 = ocupada",
+"type": "0/1,  0 = mesa 1 = comanda"
+}
+]
+Cardápio
+Recupera o catalogo de uma loja
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+storeId
+required
+number
+Example: 123
+ID da loja
+
+query Parameters
+includeStores	
+number
+Example: includeStores=Valores: 1 = sim 0 = não
+Se deve retornar lojas do cardápio
+
+type	
+string
+Example: type=PDV ou APP
+includeIfoodStatus	
+boolean
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+id	
+number
+Id da categoria de venda
+
+name	
+string
+Nome da categoria de venda
+
+position	
+number
+Posição da categoria na listagem do cardápio, caso mais de uma categoria tenha a mesma posição, elas devem ser ordenadas por ordem alfabética
+
+image	
+string
+Link da imagem da categoria
+
+parentCategoryId	
+number
+A casos onde uma categoria pode ser filha de outra, para organizar a arvore de categorias se deve usar essa referência para a categoria pai
+
+items	
+Array of objects
+Produtos da categoria
+
+201 Acesso negado
+404 Nenhuma loja encontrada
+
+get
+/catalog/{storeId}
+Produção
+
+https://api.opdv.com.br/catalog/{storeId}
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"id": "123",
+"name": "Promoções",
+"position": "1",
+"image": "string",
+"parentCategoryId": 0,
+"items": []
+}
+]
+Vendas
+Criar um pedido em uma loja
+Criar um pedido (comanda/mesa) em uma loja
+
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+Request Body schema: application/json
+id	
+number <number>
+Id do pedido
+
+externalId	
+string
+storeId	
+number
+Id da loja
+
+tableId	
+number
+Id da mesa
+
+accountId	
+number
+Id da comanda
+
+items	
+Array of objects
+Responses
+200 Sucesso
+
+post
+/orders
+Produção
+
+https://api.opdv.com.br/orders
+Request samples
+Payload
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+{
+"id": 132456,
+"externalId": "5415",
+"storeId": 0,
+"tableId": 0,
+"accountId": 0,
+"items": [
+{}
+]
+}
+Response samples
+200
+Content type
+application/json
+
+Copy
+{
+"success": "true/false"
+}
+lista vendas de uma ou mais lojas
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+query Parameters
+startDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: startDate=2022-11-01 03:00:00
+Horário em UTC
+
+endDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: endDate=2022-11-01 03:00:00
+Horário em UTC
+
+offset	
+number
+Example: offset=0
+Offset de inicio da consulta
+
+limit	
+number
+Example: limit=100
+Resultados a serem retornados, o valor máximo é 100
+
+stores	
+number <string>
+Example: stores=123,451,123
+Ids das lojas separados por ,
+
+includeProducts	
+boolean <0/1>
+Example: includeProducts=0/1
+Inclur detalhes de produtos nos pedidos, o valor default é 1, 1 significa incluir e 0 não incluir
+
+includePayments	
+boolean <0/1>
+Example: includePayments=0/1
+Inclur detalhes de pagamentos nos pedidos, o valor default é 1, 1 significa incluir e 0 não incluir
+
+includeCustomer	
+boolean <0/1>
+Example: includeCustomer=0/1
+Inclur detalhes de customer nos pedidos, o valor default é 1, 1 significa incluir e 0 não incluir
+
+onlyWithNfce	
+boolean <0/1>
+Example: onlyWithNfce=0/1
+Filtrar apenas pedidos que tenham nota fiscal emitida 1 = só os com nota fiscal emitida, 0=todos os pedidos. O valor default é 0
+
+byCompetence	
+boolean <0/1>
+Example: byCompetence=0/1
+Filtrar pedidos utilizando a competência (data de abertura do turno) de quando a venda foi feita
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+total	
+number <number>
+Total de pedidos encontrados
+
+orders	
+Array of objects[ items ]
+404 Nenhuma loja encontrada
+
+get
+/orders
+Produção
+
+https://api.opdv.com.br/orders
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"total": "12000",
+"orders": []
+}
+]
+lista avaliações de canais de venda digital
+Authorizations:
+x-access-token
+query Parameters
+startDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: startDate=2022-11-01 03:00:00
+Horário em UTC
+
+endDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: endDate=2022-11-01 03:00:00
+Horário em UTC
+
+offset	
+number
+Example: offset=0
+Offset de inicio da consulta
+
+limit	
+number
+Example: limit=100
+Resultados a serem retornados, o valor máximo é 100
+
+stores	
+number <string>
+Example: stores=123,451,123
+Ids das lojas separados por ,
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+total	
+number <number>
+Total de reviews encontrados
+
+reviews	
+Array of objects[ items ]
+404 Nenhuma loja encontrada
+
+get
+/orders/review
+Produção
+
+https://api.opdv.com.br/orders/review
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"total": "12000",
+"reviews": []
+}
+]
+Retorna uma venda por ID
+Authorizations:
+x-access-token
+path Parameters
+orderId
+required
+number
+Example: 123
+ID do pedido
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+id	
+number <number>
+Id do pedido
+
+promocode	
+string
+label	
+number
+createdDate	
+string
+Horário em UTC
+
+competenceDate	
+string
+Data de competência Horário em UTC
+
+customerId	
+number
+ID do cliente na base
+
+clientName	
+string
+Nome do cliente
+
+store	
+string
+Nome da loja onde o pedido foi feito
+
+virtualStoreId	
+number
+Caso o pedido seja feito em uma loja virtual, o id da loja virtual vai ser este campo
+
+orderType	
+string
+Origem do pedido Ex.: Ifood
+
+status	
+string
+Status do Pedido Ex.: Finalizado
+
+payment	
+string
+Indica se o Pedido esta Pago ou não
+
+paymentType	
+string
+Indica se o pedido foi pago Online ou não
+
+productTotal	
+number
+R$ Total dos produtos do pedido em centavos
+
+deliveryFee	
+number
+R$ Total do frete em centavos
+
+discount	
+number
+R$ Total do desconto em centavos
+
+total	
+number
+R$ Total do pedido em centavos
+
+totalService	
+number
+R$ Total do serviço em centavos
+
+totalPayment	
+number
+R$ Total do pago em centavos
+
+change	
+number
+R$ Total troco em centavos
+
+state	
+string
+Estado onde foi feito o Pedido. Ex.: RJ
+
+city	
+string
+Cidade Estado onde foi feito o Pedido. Ex.: Rio de Janeiro
+
+neighborhood	
+string
+Bairro onde foi feito o Pedido. Ex.: Copacabana
+
+street	
+string
+Rua onde foi feito o Pedido. Ex.: R. Duvivier
+
+cep	
+number
+CEP onde foi feito o Pedido. Ex.: 02020020
+
+number	
+number
+Número do endereço onde foi feito o Pedido. Ex.: 123
+
+complement	
+string
+Complento do endereço onde foi feito o Pedido. Ex.: ap 905
+
+storeId	
+number
+ID da loja que foi feito o pedido
+
+lat	
+number
+Latitude do pedido
+
+long	
+number
+Longitude do pedido
+
+payments	
+Array of objects
+Listagem de todos meios de pagamento utilizados no pedido
+
+items	
+Array of objects
+404 Nenhuma pedido encontrado
+
+get
+/orders/{orderId}
+Produção
+
+https://api.opdv.com.br/orders/{orderId}
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"id": 132456,
+"promocode": "string",
+"label": "5415",
+"createdDate": "2022-11-01T03:04:54.000Z",
+"competenceDate": "2022-11-01T03:04:54.000Z",
+"customerId": "12312",
+"clientName": "João Teste Silva",
+"store": "string",
+"virtualStoreId": 0,
+"orderType": "string",
+"status": "string",
+"payment": "string",
+"paymentType": "string",
+"productTotal": 0,
+"deliveryFee": 0,
+"discount": 0,
+"total": 0,
+"totalService": 0,
+"totalPayment": 0,
+"change": 0,
+"state": "string",
+"city": "string",
+"neighborhood": "string",
+"street": "string",
+"cep": 0,
+"number": 0,
+"complement": "string",
+"storeId": 0,
+"lat": 0,
+"long": 0,
+"payments": [],
+"items": []
+}
+]
+lista as items de uma venda
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+orderId
+required
+number
+Example: 123
+ID do pedido
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+productSKU	
+string <3749392960>
+SKU do produto vendido
+
+managementCategory	
+string <Bebidas>
+Nome da categoria gerencial (caso esteja cadastrada)
+
+productName	
+string <Costela Angus (Promo)>
+Nome do produto vendido
+
+price	
+number
+Preço do produto em centavos
+
+quantity	
+number
+Quantidade vendida
+
+subTotal	
+number
+SubTotal produto em centavos
+
+sequence	
+number
+Sequencial do item
+
+total	
+number
+Total do produto vendido (price * quantidade)
+
+404 Nenhuma item encontrado
+
+get
+/orders/{orderId}/items
+Produção
+
+https://api.opdv.com.br/orders/{orderId}/items
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"productSKU": "string",
+"managementCategory": "string",
+"productName": "string",
+"price": 0,
+"quantity": 0,
+"subTotal": 0,
+"sequence": 0,
+"total": 0
+}
+]
+retorna o cliente de uma venda
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+orderId
+required
+number
+Example: 123
+ID do pedido
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+id	
+number <3749392960>
+Id do cliente
+
+name	
+string <Teste da Silva>
+Nome do cliente
+
+404 Nenhuma cliente encontrado
+
+get
+/orders/{orderId}/customer
+Produção
+
+https://api.opdv.com.br/orders/{orderId}/customer
+Response samples
+200
+Content type
+application/json
+
+Copy
+{
+"id": 0,
+"name": "string"
+}
+Retorna o endereço de uma venda
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+orderId
+required
+number
+Example: 123
+ID do pedido
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+id	
+number <3749392960>
+Id do endereço
+
+orderId	
+number <3749392960>
+Id da venda
+
+state	
+string <SP>
+Estado da venda
+
+city	
+string <Porto Alegre>
+Cidade da venda
+
+neighborhood	
+string <Barra>
+Bairro da venda
+
+street	
+string <R. Teste>
+Rua da venda
+
+cep	
+number
+CEP da venda
+
+number	
+number
+CEP da venda
+
+complement	
+string
+Complento da venda
+
+lon	
+number
+Longitude da venda
+
+lat	
+number
+Latitude da venda
+
+pointReference	
+string <casa verde>
+Ponto de referencia da venda
+
+404 Nenhum endereço encontrado
+
+get
+/orders/{orderId}/address
+Produção
+
+https://api.opdv.com.br/orders/{orderId}/address
+Response samples
+200
+Content type
+application/json
+
+Copy
+{
+"id": 0,
+"orderId": 0,
+"state": "string",
+"city": "string",
+"neighborhood": "string",
+"street": "string",
+"cep": 905555,
+"number": 905555,
+"complement": "Bloco a",
+"lon": -38.522822,
+"lat": -38.522822,
+"pointReference": "string"
+}
+Executa o pagamento e fechamento de um pedido
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+orderId
+required
+number
+Example: 123
+ID do pedido
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Request Body schema: application/json
+value	
+number <number>
+Valor do pagamento em centavos, ele precisa ser igual ao valor do pedido
+
+Responses
+200 Sucesso
+Response Schema: application/json
+success	
+boolean
+Indica se foi pago e fechado com sucesso
+
+204 Pedido já estava pago e finalizado
+400 Erro no request
+404 Pedido não encontrado
+
+put
+/orders/{orderId}/pay
+Produção
+
+https://api.opdv.com.br/orders/{orderId}/pay
+Request samples
+Payload
+Content type
+application/json
+
+Copy
+{
+"value": "12000"
+}
+Response samples
+200
+Content type
+application/json
+
+Copy
+{
+"success": "true/false"
+}
+Retorna um pedido com base na mesa
+Authorizations:
+x-access-token
+path Parameters
+name
+required
+string
+Example: C1
+Código da comanda
+
+query Parameters
+name
+required
+string
+Example: name=M1
+Código da mesa
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+id	
+number <number>
+Id do pedido
+
+promocode	
+string
+label	
+number
+createdDate	
+string
+Horário em UTC
+
+competenceDate	
+string
+Data de competência Horário em UTC
+
+customerId	
+number
+ID do cliente na base
+
+clientName	
+string
+Nome do cliente
+
+store	
+string
+Nome da loja onde o pedido foi feito
+
+virtualStoreId	
+number
+Caso o pedido seja feito em uma loja virtual, o id da loja virtual vai ser este campo
+
+orderType	
+string
+Origem do pedido Ex.: Ifood
+
+status	
+string
+Status do Pedido Ex.: Finalizado
+
+payment	
+string
+Indica se o Pedido esta Pago ou não
+
+paymentType	
+string
+Indica se o pedido foi pago Online ou não
+
+productTotal	
+number
+R$ Total dos produtos do pedido em centavos
+
+deliveryFee	
+number
+R$ Total do frete em centavos
+
+discount	
+number
+R$ Total do desconto em centavos
+
+total	
+number
+R$ Total do pedido em centavos
+
+totalService	
+number
+R$ Total do serviço em centavos
+
+totalPayment	
+number
+R$ Total do pago em centavos
+
+change	
+number
+R$ Total troco em centavos
+
+state	
+string
+Estado onde foi feito o Pedido. Ex.: RJ
+
+city	
+string
+Cidade Estado onde foi feito o Pedido. Ex.: Rio de Janeiro
+
+neighborhood	
+string
+Bairro onde foi feito o Pedido. Ex.: Copacabana
+
+street	
+string
+Rua onde foi feito o Pedido. Ex.: R. Duvivier
+
+cep	
+number
+CEP onde foi feito o Pedido. Ex.: 02020020
+
+number	
+number
+Número do endereço onde foi feito o Pedido. Ex.: 123
+
+complement	
+string
+Complento do endereço onde foi feito o Pedido. Ex.: ap 905
+
+storeId	
+number
+ID da loja que foi feito o pedido
+
+lat	
+number
+Latitude do pedido
+
+long	
+number
+Longitude do pedido
+
+payments	
+Array of objects
+Listagem de todos meios de pagamento utilizados no pedido
+
+items	
+Array of objects
+404 Nenhuma pedido encontrado
+
+get
+/orders/table/{name}
+Produção
+
+https://api.opdv.com.br/orders/table/{name}
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+{
+"id": 132456,
+"promocode": "string",
+"label": "5415",
+"createdDate": "2022-11-01T03:04:54.000Z",
+"competenceDate": "2022-11-01T03:04:54.000Z",
+"customerId": "12312",
+"clientName": "João Teste Silva",
+"store": "string",
+"virtualStoreId": 0,
+"orderType": "string",
+"status": "string",
+"payment": "string",
+"paymentType": "string",
+"productTotal": 0,
+"deliveryFee": 0,
+"discount": 0,
+"total": 0,
+"totalService": 0,
+"totalPayment": 0,
+"change": 0,
+"state": "string",
+"city": "string",
+"neighborhood": "string",
+"street": "string",
+"cep": 0,
+"number": 0,
+"complement": "string",
+"storeId": 0,
+"lat": 0,
+"long": 0,
+"payments": [
+{}
+],
+"items": [
+{}
+]
+}
+Retorna um pedido com base na comanda
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+name
+required
+string
+Example: C1
+Código da comanda
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+id	
+number <number>
+Id do pedido
+
+promocode	
+string
+label	
+number
+createdDate	
+string
+Horário em UTC
+
+competenceDate	
+string
+Data de competência Horário em UTC
+
+customerId	
+number
+ID do cliente na base
+
+clientName	
+string
+Nome do cliente
+
+store	
+string
+Nome da loja onde o pedido foi feito
+
+virtualStoreId	
+number
+Caso o pedido seja feito em uma loja virtual, o id da loja virtual vai ser este campo
+
+orderType	
+string
+Origem do pedido Ex.: Ifood
+
+status	
+string
+Status do Pedido Ex.: Finalizado
+
+payment	
+string
+Indica se o Pedido esta Pago ou não
+
+paymentType	
+string
+Indica se o pedido foi pago Online ou não
+
+productTotal	
+number
+R$ Total dos produtos do pedido em centavos
+
+deliveryFee	
+number
+R$ Total do frete em centavos
+
+discount	
+number
+R$ Total do desconto em centavos
+
+total	
+number
+R$ Total do pedido em centavos
+
+totalService	
+number
+R$ Total do serviço em centavos
+
+totalPayment	
+number
+R$ Total do pago em centavos
+
+change	
+number
+R$ Total troco em centavos
+
+state	
+string
+Estado onde foi feito o Pedido. Ex.: RJ
+
+city	
+string
+Cidade Estado onde foi feito o Pedido. Ex.: Rio de Janeiro
+
+neighborhood	
+string
+Bairro onde foi feito o Pedido. Ex.: Copacabana
+
+street	
+string
+Rua onde foi feito o Pedido. Ex.: R. Duvivier
+
+cep	
+number
+CEP onde foi feito o Pedido. Ex.: 02020020
+
+number	
+number
+Número do endereço onde foi feito o Pedido. Ex.: 123
+
+complement	
+string
+Complento do endereço onde foi feito o Pedido. Ex.: ap 905
+
+storeId	
+number
+ID da loja que foi feito o pedido
+
+lat	
+number
+Latitude do pedido
+
+long	
+number
+Longitude do pedido
+
+payments	
+Array of objects
+Listagem de todos meios de pagamento utilizados no pedido
+
+items	
+Array of objects
+404 Nenhuma pedido encontrado
+
+get
+/orders/account/{name}
+Produção
+
+https://api.opdv.com.br/orders/account/{name}
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+{
+"id": 132456,
+"promocode": "string",
+"label": "5415",
+"createdDate": "2022-11-01T03:04:54.000Z",
+"competenceDate": "2022-11-01T03:04:54.000Z",
+"customerId": "12312",
+"clientName": "João Teste Silva",
+"store": "string",
+"virtualStoreId": 0,
+"orderType": "string",
+"status": "string",
+"payment": "string",
+"paymentType": "string",
+"productTotal": 0,
+"deliveryFee": 0,
+"discount": 0,
+"total": 0,
+"totalService": 0,
+"totalPayment": 0,
+"change": 0,
+"state": "string",
+"city": "string",
+"neighborhood": "string",
+"street": "string",
+"cep": 0,
+"number": 0,
+"complement": "string",
+"storeId": 0,
+"lat": 0,
+"long": 0,
+"payments": [
+{}
+],
+"items": [
+{}
+]
+}
+Totais de venda de uma ou mais lojas
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+query Parameters
+startDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: startDate=2022-11-01 03:00:00
+Horário em UTC
+
+endDate
+required
+string <YYYY-MM-DD hh:mm:ss>
+Example: endDate=2022-11-01 03:00:00
+Horário em UTC
+
+stores	
+number <string>
+Example: stores=123,451,123
+Ids das lojas separados por ,
+
+byCompetence	
+boolean <0/1>
+Example: byCompetence=0/1
+Filtrar pedidos utilizando a competência (data de abertura do turno) de quando a venda foi feita
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+Array 
+storeId	
+number <number>
+ID da loja no sistema
+
+orders	
+number <number>
+Total de pedidos da loja
+
+total	
+number <number>
+Total de vendas da loja, o valor esta em centavos
+
+404 Nenhuma loja encontrada
+
+get
+/orders/summarised
+Produção
+
+https://api.opdv.com.br/orders/summarised
+Response samples
+200
+Content type
+application/json
+
+Copy
+Expand allCollapse all
+[
+{
+"storeId": "354",
+"orders": "12000",
+"total": "12000"
+}
+]
+Validar chave de sorteio
+validatePromocode
+Authorizations:
+x-access-token
+ API Key: x-access-token
+Header parameter name: x-access-token
+path Parameters
+uuid
+required
+number >= 1
+o Código impresso na nota fiscal
+
+header Parameters
+x-access-token
+required
+string
+Example: 123123-123123-123
+Responses
+200 Modelo de retorno
+Response Schema: application/json
+total	
+number
+Total do pedido
+
+404 Nenhuma pedido encontrado
+
+get
+/orders/{uuid}/validate
+Produção
+
+https://api.opdv.com.br/orders/{uuid}/validate
+Response samples
+200
+Content type
+application/json
+
+Copy
+{
+"total": 0
+}
