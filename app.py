@@ -21,16 +21,9 @@ db = SQLAlchemy(model_class=Base)
 # Create the app
 app = Flask(__name__)
 
-# Configuration for PythonAnywhere
-if os.environ.get('PYTHONANYWHERE_SITE'):
-    # Production settings for PythonAnywhere
-    app.secret_key = os.environ.get("SESSION_SECRET", "your-secret-key-change-this")
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///instance/integration.db"
-else:
-    # Development settings
-    app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key")
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///instance/integration.db")
-
+# Simple configuration for PythonAnywhere
+app.secret_key = "opdv-omie-sync-secret-key-2024"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///instance/integration.db"
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_recycle": 300,
     "pool_pre_ping": True,
