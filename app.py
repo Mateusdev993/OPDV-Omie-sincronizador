@@ -29,6 +29,12 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_pre_ping": True,
 }
 
+# Create instance directory if it doesn't exist
+instance_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance')
+if not os.path.exists(instance_path):
+    os.makedirs(instance_path)
+    app.logger.info(f"Created instance directory: {instance_path}")
+
 # Initialize the app with the extension
 db.init_app(app)
 
