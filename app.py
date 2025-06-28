@@ -21,19 +21,20 @@ db = SQLAlchemy(model_class=Base)
 # Create the app
 app = Flask(__name__)
 
-# Simple configuration for PythonAnywhere
-app.secret_key = "opdv-omie-sync-secret-key-2024"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///instance/integration.db"
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
-    "pool_pre_ping": True,
-}
-
 # Create instance directory if it doesn't exist
 instance_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance')
 if not os.path.exists(instance_path):
     os.makedirs(instance_path)
     app.logger.info(f"Created instance directory: {instance_path}")
+
+# Simple configuration for PythonAnywhere with absolute path
+app.secret_key = "opdv-omie-sync-secret-key-2024"
+database_path = os.path.join(instance_path, 'integration.db')
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{database_path}"
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_recycle": 300,
+    "pool_pre_ping": True,
+}
 
 # Initialize the app with the extension
 db.init_app(app)
